@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 const font = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
- title: "rides",
+ title: "rides • Online car marketplace",
  description: "Online car marketplace",
 };
 

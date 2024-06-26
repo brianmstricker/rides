@@ -4,13 +4,13 @@ import ThemeToggleButton from "./ThemeToggleButton";
 import NavSearch from "./navbar/NavSearch";
 
 const Navbar = () => {
- // todo: add border on scroll border-b-4 border-b-purple-600
+ // todo: add border on scroll border-b-4 border-b-mainPurple
  return (
   <div className="bg-primary-foreground h-20 fixed top-0 w-full">
    <div className="contain flex justify-between items-center h-full">
     <Link href="/" className="text-3xl font-bold tracking-wide italic relative group">
-     r<span className="text-purple-600">i</span>des
-     <div className="w-full bg-purple-600 h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-200 origin-left" />
+     <span className="group-hover:text-mainPurple transition-colors duration-300">rides</span>
+     <div className="w-full bg-mainPurple h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-300 origin-left" />
     </Link>
     <div className="flex items-center gap-3 sm:gap-8">
      {/* todo: make these links or dropdown menus */}

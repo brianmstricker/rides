@@ -78,5 +78,5 @@
 }
 
 .contain {
- @apply mx-auto max-w-[85rem] px-4;
+ @apply mx-auto max-w-[85rem];
 }

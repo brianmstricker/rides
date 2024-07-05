@@ -47,7 +47,7 @@ const Navbar = () => {
          )}
         </Link>
         {option.submenu && (
-         <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 absolute bg-primary-foreground p-4 left-1/2 -translate-x-1/2 min-w-max rounded-md">
+         <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 absolute bg-primary-foreground p-4 left-1/2 -translate-x-1/2 min-w-max rounded-md pointer-events-none group-hover:pointer-events-auto">
           <div className="grid grid-cols-3">
            {Array.from({ length: 6 }).map((_, i) => (
             <div key={i}>Submenu {i}</div>

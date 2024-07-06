@@ -21,14 +21,14 @@ const NavOptions: NavOption[] = [
 const Navbar = () => {
  // todo: add border on scroll border-b-4 border-b-mainPurple
  return (
-  <div className="bg-primary-foreground h-20 fixed top-0 w-full">
+  <div className="bg-primary-foreground h-16 fixed top-0 w-full z-10">
    <div className="contain h-full">
     <div className="px-4 flex justify-between items-center h-full">
      <Link href="/" className="text-3xl font-bold tracking-wide italic relative group">
       <span className="group-hover:text-mainPurple transition-colors duration-300">rides</span>
       <div className="w-full bg-mainPurple h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-300 origin-left" />
      </Link>
-     <div className="flex items-center gap-3 sm:gap-8">
+     <div className="flex items-center gap-3 sm:gap-8 text-[15px]">
       {NavOptions.map((option) => (
        <div className="relative group" key={option.name}>
         <Link
@@ -60,7 +60,7 @@ const Navbar = () => {
       <NavSearch />
      </div>
      <div className="flex items-center gap-3">
-      <Button variant="main" className="text-[16px]">
+      <Button variant="main" className="text-[15px]">
        Login
       </Button>
       <ThemeToggleButton />

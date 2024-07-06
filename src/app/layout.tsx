@@ -22,9 +22,7 @@ export default function RootLayout({
    <body className={cn("min-h-screen bg-background font-sans antialiased", font.variable)}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
      <Navbar />
-     <div className="contain pt-24">
-      <div className="px-4">{children}</div>
-     </div>
+     <div className="contain pt-16 px-4">{children}</div>
     </ThemeProvider>
    </body>
   </html>

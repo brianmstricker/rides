@@ -8,10 +8,10 @@ function ThemeToggleButton() {
  const [mounted, setMounted] = useState(false);
  const { setTheme, theme } = useTheme();
  useEffect(() => setMounted(true), []);
- if (!mounted) return null;
  function toggleTheme() {
   setTheme(theme === "light" ? "dark" : "light");
  }
+ if (!mounted) return <div className="h-[36px] w-[36px] bg-secondary rounded-md animate-pulse" />;
  return (
   <div>
    <Button onClick={toggleTheme} variant="outline" size="icon">

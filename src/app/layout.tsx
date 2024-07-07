@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 const font = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
- title: "rides • Online car marketplace",
+ title: "rides • Car marketplace",
  description: "Online car marketplace",
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
    <body className={cn("min-h-screen bg-background font-sans antialiased", font.variable)}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
      <Navbar />
-     <div className="contain pt-16 px-4">{children}</div>
+     <div className="pt-16">{children}</div>
     </ThemeProvider>
    </body>
   </html>

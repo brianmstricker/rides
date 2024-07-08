@@ -35,11 +35,13 @@ const NavSearch = () => {
     className={cn("transition-all duration-300 scale-0 opacity-0 w-0 absolute", isExpandSearch && "scale-100 opacity-100 w-full")}
     value={searchText}
     onChange={(e) => setSearchText(e.target.value)}
+    tabIndex={isExpandSearch ? 0 : -1}
    />
    <Button
     variant="ghost"
     className={cn("!px-2 transition-all duration-300 absolute right-0", isExpandSearch && "right-0")}
     onClick={handleSearchClick}
+    onFocus={() => setIsExpandSearch(true)}
    >
     <Search size={20} />
    </Button>

@@ -12,7 +12,6 @@ const BrowseByType = () => {
     <TypeCard />
     <TypeCard />
     <TypeCard />
-    <TypeCard />
    </div>
   </div>
  );

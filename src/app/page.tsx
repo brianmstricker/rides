@@ -20,9 +20,9 @@ export default function Home() {
       loading="eager"
      />
      <div className="text-white">
-      <p className="text-center text-sm sm:text-base">Search from a rich collection of vehicles.</p>
+      <p className="text-center text-sm sm:text-base text-gray-300">Search from a rich collection of vehicles.</p>
       <h1 className="text-center text-[7vw] sm:text-5xl md:text-6xl tracking-wider font-bold leading-relaxed">Find the perfect ride</h1>
-      <div className="max-w-[661px] px-2">
+      <div className="max-w-[650px] px-2">
        <HomeSearchBar />
        <div className="mt-2 text-center">or</div>
        <BrowseByType />

@@ -21,8 +21,10 @@ export default function RootLayout({
   <html lang="en" suppressHydrationWarning>
    <body className={cn("min-h-screen bg-background font-sans antialiased", font.variable)}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-     <Navbar />
-     <div className="pt-16">{children}</div>
+     <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+      <Navbar />
+      <div className="pt-16">{children}</div>
+     </div>
     </ThemeProvider>
    </body>
   </html>

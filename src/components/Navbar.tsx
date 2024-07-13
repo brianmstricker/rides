@@ -23,7 +23,7 @@ const Navbar = () => {
  return (
   <div className="bg-primary-foreground h-16 fixed top-0 w-full z-10">
    <div className="contain h-full">
-    <div className="px-4 flex justify-between items-center h-full">
+    <div className="flex justify-between items-center h-full">
      <Link href="/" className="text-3xl font-bold tracking-wide italic relative group">
       <span className="group-hover:text-mainPurple transition-colors duration-300">rides</span>
       <div className="w-full bg-mainPurple h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-300 origin-left" />

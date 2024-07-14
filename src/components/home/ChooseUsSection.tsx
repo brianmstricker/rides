@@ -5,7 +5,7 @@ const ChooseUsSection = () => {
  return (
   <section className="contain mt-20">
    <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Why Choose Us?</h2>
-   <div className="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+   <div className="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-4 gap-6 mt-7">
     <ChooseUsCard
      title="Convenience"
      icon={CheckCircle}

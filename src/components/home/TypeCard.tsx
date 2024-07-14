@@ -2,9 +2,9 @@ import { Car } from "lucide-react";
 
 const TypeCard = () => {
  return (
-  <div className="border border-border/10 bg-white/15 rounded-md px-2 py-1">
+  <div className="border border-border/10 dark:border-border bg-white/15 dark:bg-black/80 rounded-md p-2 min-w-[75px]">
    <Car size={40} className="mx-auto" />
-   Electric
+   <div className="text-center">SUV</div>
   </div>
  );
 };

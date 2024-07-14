@@ -21,7 +21,7 @@ const NavOptions: NavOption[] = [
 const Navbar = () => {
  // todo: add border on scroll border-b-4 border-b-mainPurple
  return (
-  <div className="bg-primary-foreground h-16 fixed top-0 w-full z-10">
+  <div className="bg-primary-foreground text-foreground h-16 fixed top-0 w-full z-10">
    <div className="contain h-full">
     <div className="flex justify-between items-center h-full">
      <Link href="/" className="text-3xl font-bold tracking-wide italic relative group">

@@ -1,15 +1,77 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import car1 from "@/assets/camry.jpg";
-import Image from "next/image";
-import { Activity, ArrowUpRight, Gauge, LifeBuoy } from "lucide-react";
+import { useEffect, useState } from "react";
+import PopularSectionCard from "./PopularSectionCard";
+import { Activity, Gauge, LifeBuoy } from "lucide-react";
 
 const categories = ["popular", "electric", "suv", "truck"];
+const popularCards = [
+ {
+  title: "Toyota Camry",
+  price: "28,000",
+  stats: [
+   { icon: Gauge, text: "32 MPG" },
+   { icon: LifeBuoy, text: "AWD" },
+   { icon: Activity, text: "Hybrid" },
+  ],
+ },
+ {
+  title: "Toyota Camry",
+  price: "28,000",
+  stats: [
+   { icon: Gauge, text: "32 MPG" },
+   { icon: LifeBuoy, text: "AWD" },
+   { icon: Activity, text: "Hybrid" },
+  ],
+ },
+ {
+  title: "Toyota Camry",
+  price: "28,000",
+  stats: [
+   { icon: Gauge, text: "32 MPG" },
+   { icon: LifeBuoy, text: "AWD" },
+   { icon: Activity, text: "Hybrid" },
+  ],
+ },
+ {
+  title: "Toyota Camry",
+  price: "28,000",
+  stats: [
+   { icon: Gauge, text: "32 MPG" },
+   { icon: LifeBuoy, text: "AWD" },
+   { icon: Activity, text: "Hybrid" },
+  ],
+ },
+ {
+  title: "Toyota Camry",
+  price: "28,000",
+  stats: [
+   { icon: Gauge, text: "32 MPG" },
+   { icon: LifeBuoy, text: "AWD" },
+   { icon: Activity, text: "Hybrid" },
+  ],
+ },
+];
 
 const PopularSection = () => {
  const [selectedCategory, setSelectedCategory] = useState("popular");
- // todo: create 5/6 cards for each category
+ const [columns, setColumns] = useState(2);
+ useEffect(() => {
+  const updateColumns = () => {
+   if (window.innerWidth >= 1280) {
+    setColumns(5);
+   } else if (window.innerWidth >= 1024) {
+    setColumns(4);
+   } else if (window.innerWidth >= 768) {
+    setColumns(3);
+   } else {
+    setColumns(2);
+   }
+  };
+  window.addEventListener("resize", updateColumns);
+  updateColumns();
+  return () => window.removeEventListener("resize", updateColumns);
+ }, []);
  return (
   <section className="contain mt-20">
    <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Popular vehicles</h2>
@@ -27,39 +89,13 @@ const PopularSection = () => {
      </li>
     ))}
    </ul>
-   <div className="mt-7 grid grid-cols-4">
+   <div className="mt-7 grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
     {selectedCategory === "popular" && (
-     <div className="border rounded-md overflow-hidden">
-      <div className="relative w-full h-40">
-       <Image src={car1} alt="car" fill className="object-cover" />
-      </div>
-      <div className="py-2 px-4 bg-primary-foreground">
-       <h3 className="font-bold text-2xl">Toyota Camry</h3>
-       <div className="mt-4 flex justify-between text-[15px]">
-        <div className="flex flex-col items-center gap-1">
-         <Gauge size={22} />
-         <div>32 MPG</div>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-         <LifeBuoy size={22} />
-         <div>AWD</div>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-         <Activity size={22} />
-         <div>Hybrid</div>
-        </div>
-       </div>
-       <div className="mt-4 flex justify-between items-center">
-        <div className="text-sm flex items-center gap-1">
-         <span>View more</span>
-         <ArrowUpRight />
-        </div>
-        <div>
-         <span className="text-xs">from</span> <span className="font-bold text-xl">$28,000</span>
-        </div>
-       </div>
-      </div>
-     </div>
+     <>
+      {popularCards.slice(0, columns).map((card, index) => (
+       <PopularSectionCard key={index} title={card.title} price={card.price} stats={card.stats} />
+      ))}
+     </>
     )}
    </div>
   </section>

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
+import { ScrollProvider } from "@/components/ScrollProvider";
 
 const font = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -19,12 +20,14 @@ export default function RootLayout({
 }>) {
  return (
   <html lang="en" suppressHydrationWarning>
-   <body className={cn("min-h-screen bg-background font-sans antialiased", font.variable)}>
+   <body className={cn("min-h-screen bg-background text-foreground font-sans antialiased", font.variable)}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-     <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
-      <Navbar />
-      <div className="pt-16">{children}</div>
-     </div>
+     <ScrollProvider>
+      <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+       <Navbar />
+       <div className="pt-16">{children}</div>
+      </div>
+     </ScrollProvider>
     </ThemeProvider>
    </body>
   </html>

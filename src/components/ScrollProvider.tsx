@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export function ScrollProvider({ children }: Readonly<{ children: React.ReactNode }>) {
  const [mounted, setMounted] = useState(false);
- const [loading, setLoading] = useState(true);
+ const [isRestoring, setIsRestoring] = useState(true);
  useEffect(() => setMounted(true), []);
  useEffect(() => {
   const saveScrollPosition = () => {
@@ -22,14 +22,9 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
    if (scrollPosition) {
     window.scrollTo(0, parseFloat(scrollPosition));
    }
-   setLoading(false);
+   setIsRestoring(false);
   }
  }, [mounted]);
  if (!mounted) return null;
- return (
-  <div>
-   {loading && <div className="fixed inset-0 z-[9999] bg-background" />}
-   {children}
-  </div>
- );
+ return <div style={{ visibility: isRestoring ? "hidden" : "visible" }}>{children}</div>;
 }

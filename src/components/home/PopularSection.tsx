@@ -2,56 +2,9 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import PopularSectionCard from "./PopularSectionCard";
-import { Activity, Gauge, LifeBuoy } from "lucide-react";
+import { electricCards, popularCards, SUVCards, truckCards } from "./PopularCardInfo";
 
-const categories = ["popular", "electric", "suv", "truck"];
-const popularCards = [
- {
-  title: "Toyota Camry",
-  price: "28,000",
-  stats: [
-   { icon: Gauge, text: "32 MPG" },
-   { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
-  ],
- },
- {
-  title: "Toyota Camry",
-  price: "28,000",
-  stats: [
-   { icon: Gauge, text: "32 MPG" },
-   { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
-  ],
- },
- {
-  title: "Toyota Camry",
-  price: "28,000",
-  stats: [
-   { icon: Gauge, text: "32 MPG" },
-   { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
-  ],
- },
- {
-  title: "Toyota Camry",
-  price: "28,000",
-  stats: [
-   { icon: Gauge, text: "32 MPG" },
-   { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
-  ],
- },
- {
-  title: "Toyota Camry",
-  price: "28,000",
-  stats: [
-   { icon: Gauge, text: "32 MPG" },
-   { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
-  ],
- },
-];
+const categories = ["popular", "electric", "SUV", "truck"];
 
 const PopularSection = () => {
  const [selectedCategory, setSelectedCategory] = useState("popular");
@@ -92,8 +45,29 @@ const PopularSection = () => {
    <div className="mt-7 grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
     {selectedCategory === "popular" && (
      <>
-      {popularCards.slice(0, columns).map((card, index) => (
-       <PopularSectionCard key={index} title={card.title} price={card.price} stats={card.stats} />
+      {popularCards.slice(0, columns).map((card) => (
+       <PopularSectionCard key={card.id} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+      ))}
+     </>
+    )}
+    {selectedCategory === "electric" && (
+     <>
+      {electricCards.slice(0, columns).map((card, index) => (
+       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+      ))}
+     </>
+    )}
+    {selectedCategory === "SUV" && (
+     <>
+      {SUVCards.slice(0, columns).map((card, index) => (
+       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+      ))}
+     </>
+    )}
+    {selectedCategory === "truck" && (
+     <>
+      {truckCards.slice(0, columns).map((card, index) => (
+       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
       ))}
      </>
     )}

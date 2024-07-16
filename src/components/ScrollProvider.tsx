@@ -28,7 +28,6 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
    if (scrollPosition && navigationEntries[0]?.type === "reload") {
     window.scrollTo(0, parseFloat(scrollPosition));
    } else {
-    console.log("here");
     window.scrollTo(0, 0);
    }
    setIsRestoring(false);

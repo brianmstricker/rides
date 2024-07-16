@@ -21,7 +21,7 @@ const PopularSectionCard = ({
    <div className="relative w-full h-40">
     <Image src={image} alt={title} fill className="object-cover rounded-t-md" />
    </div>
-   <div className="p-2 bg-primary-foreground border rounded-b-md">
+   <div className="p-2 bg-muted border rounded-b-md">
     <h3 className="font-bold text-2xl">{title}</h3>
     <div className="mt-4 flex justify-between text-[15px]">
      {stats.map((stat, i) => (

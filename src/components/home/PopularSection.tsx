@@ -42,7 +42,7 @@ const PopularSection = () => {
      </li>
     ))}
    </ul>
-   <div className="mt-7 grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+   <div className="mt-7 grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
     {selectedCategory === "popular" && (
      <>
       {popularCards.slice(0, columns).map((card) => (

@@ -1,4 +1,4 @@
-import { Activity, Anchor, DollarSign, Gauge, LifeBuoy, Zap } from "lucide-react";
+import { DollarSign, Gauge, LifeBuoy, SquareActivity, Zap } from "lucide-react";
 import camry from "@/assets/camry.jpg";
 import rav4 from "@/assets/rav4.jpg";
 import modelY from "@/assets/modelY.webp";
@@ -13,7 +13,7 @@ export const popularCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -35,7 +35,7 @@ export const popularCards = [
   stats: [
    { icon: Gauge, text: "30 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -46,7 +46,7 @@ export const popularCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -57,7 +57,7 @@ export const popularCards = [
   stats: [
    { icon: Gauge, text: "30 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
 ];
@@ -71,7 +71,7 @@ export const electricCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -82,7 +82,7 @@ export const electricCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -93,7 +93,7 @@ export const electricCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -104,7 +104,7 @@ export const electricCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -115,7 +115,7 @@ export const electricCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
 ];
@@ -129,7 +129,7 @@ export const SUVCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -140,7 +140,7 @@ export const SUVCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -151,7 +151,7 @@ export const SUVCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -162,7 +162,7 @@ export const SUVCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -173,7 +173,7 @@ export const SUVCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
 ];
@@ -187,7 +187,7 @@ export const truckCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -198,7 +198,7 @@ export const truckCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -209,7 +209,7 @@ export const truckCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -220,7 +220,7 @@ export const truckCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
  {
@@ -231,7 +231,7 @@ export const truckCards = [
   stats: [
    { icon: Gauge, text: "32 MPG" },
    { icon: LifeBuoy, text: "AWD" },
-   { icon: Activity, text: "Hybrid" },
+   { icon: SquareActivity, text: "Hybrid" },
   ],
  },
 ];

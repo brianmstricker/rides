@@ -21,11 +21,11 @@ export default function RootLayout({
  return (
   <html lang="en" suppressHydrationWarning>
    <body className={cn("min-h-screen bg-background text-foreground font-sans antialiased", font.variable)}>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
      <ScrollProvider>
       <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
        <Navbar />
-       <div className="pt-16">{children}</div>
+       <div className="pt-16 overflow-hidden">{children}</div>
       </div>
      </ScrollProvider>
     </ThemeProvider>

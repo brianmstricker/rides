@@ -80,16 +80,3 @@
 .contain {
  @apply mx-auto max-w-[90rem] px-4;
 }
-
-.fadeInCard {
- animation: fade-card 0.5s ease;
-}
-
-@keyframes fade-card {
- from {
-  opacity: 0;
- }
- to {
-  opacity: 1;
- }
-}

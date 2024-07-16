@@ -11,9 +11,6 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
   const saveScrollPosition = () => {
    sessionStorage.setItem("scrollPosition", window.scrollY.toString());
   };
-  const resetScrollPosition = () => {
-   sessionStorage.removeItem("scrollPosition");
-  };
   window.addEventListener("beforeunload", saveScrollPosition);
   window.addEventListener("popstate", saveScrollPosition);
   return () => {

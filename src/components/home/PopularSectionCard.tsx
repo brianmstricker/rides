@@ -1,6 +1,8 @@
-import car1 from "@/assets/camry.jpg";
 import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight, LucideProps } from "lucide-react";
+import { InView } from "react-intersection-observer";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const PopularSectionCard = ({
  title,
@@ -16,9 +18,16 @@ const PopularSectionCard = ({
   text: string;
  }[];
 }) => {
+ // todo: animations
+ const [isInView, setIsInView] = useState(false);
  return (
-  <div className="fadeInCard">
-   <div className="relative w-full h-52 min-[500px]:h-40">
+  <InView
+   as="div"
+   className={cn("min-w-[230px] pb-2", !isInView && "opacity-50")}
+   threshold={0.95}
+   onChange={(inView) => setIsInView(inView)}
+  >
+   <div className="relative w-full h-40">
     <Image src={image} alt={title} fill className="object-cover rounded-t-md" />
    </div>
    <div className="p-2 bg-muted border rounded-b-md">
@@ -41,7 +50,7 @@ const PopularSectionCard = ({
      </div>
     </div>
    </div>
-  </div>
+  </InView>
  );
 };
 export default PopularSectionCard;

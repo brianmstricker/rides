@@ -1,16 +1,16 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import PopularSectionCard from "./PopularSectionCard";
-import { electricCards, popularCards, SUVCards, truckCards } from "./PopularCardInfo";
+import { electricCards, popularCards, SUVCards, recentCards } from "./PopularCardInfo";
+import ShopSectionCard from "./ShopSectionCard";
 
-const categories = ["popular", "electric", "SUV", "truck"];
+const categories = ["popular", "electric", "SUV", "recent"];
 
-const PopularSection = () => {
+const ShopSection = () => {
  const [selectedCategory, setSelectedCategory] = useState("popular");
  return (
   <section className="contain mt-20">
-   <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Popular vehicles</h2>
+   <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Shop vehicles</h2>
    <ul className="mt-7 flex justify-center items-center gap-6 border-b pb-2">
     {categories.map((category) => (
      <li key={category}>
@@ -39,28 +39,28 @@ const PopularSection = () => {
     {selectedCategory === "popular" && (
      <>
       {popularCards.map((card) => (
-       <PopularSectionCard key={card.id} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+       <ShopSectionCard key={card.id} title={card.title} price={card.price} image={card.image} stats={card.stats} />
       ))}
      </>
     )}
     {selectedCategory === "electric" && (
      <>
       {electricCards.map((card, index) => (
-       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+       <ShopSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
       ))}
      </>
     )}
     {selectedCategory === "SUV" && (
      <>
       {SUVCards.map((card, index) => (
-       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+       <ShopSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
       ))}
      </>
     )}
-    {selectedCategory === "truck" && (
+    {selectedCategory === "recent" && (
      <>
-      {truckCards.map((card, index) => (
-       <PopularSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
+      {recentCards.map((card, index) => (
+       <ShopSectionCard key={index} title={card.title} price={card.price} image={card.image} stats={card.stats} />
       ))}
      </>
     )}
@@ -68,4 +68,4 @@ const PopularSection = () => {
   </section>
  );
 };
-export default PopularSection;
+export default ShopSection;

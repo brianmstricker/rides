@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 
-const PopularSectionCard = ({
+const ShopSectionCard = ({
  title,
  price,
  image,
@@ -49,7 +49,7 @@ const PopularSectionCard = ({
      </div>
      <div className="p-2 bg-muted border rounded-b-md">
       <h3 className="font-bold text-2xl">{title}</h3>
-      <div className="mt-4 flex justify-between items-baseline text-[15px] gap-2">
+      <div className="mt-5 flex justify-between items-baseline text-[15px] gap-2">
        {stats.map((stat, i) => (
         <div key={i} className="flex flex-col items-center gap-1">
          <stat.icon size={22} />
@@ -57,7 +57,7 @@ const PopularSectionCard = ({
         </div>
        ))}
       </div>
-      <div className="mt-4 flex justify-between items-end whitespace-nowrap">
+      <div className="mt-4 flex justify-between items-end whitespace-nowrap -mb-1">
        <div className="text-xs items-center gap-[2px] flex">
         <span className="w-min">View more</span>
         <ArrowUpRight size={20} />
@@ -72,4 +72,4 @@ const PopularSectionCard = ({
   </>
  );
 };
-export default PopularSectionCard;
+export default ShopSectionCard;

@@ -178,7 +178,7 @@ export const SUVCards = [
  },
 ];
 
-export const truckCards = [
+export const recentCards = [
  {
   id: 1,
   title: "Toyota Camry",

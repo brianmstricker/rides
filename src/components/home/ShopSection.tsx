@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { electricCards, popularCards, SUVCards, recentCards } from "./PopularCardInfo";
 import ShopSectionCard from "./ShopSectionCard";
+import TitleH2 from "../global/TitleH2";
 
 const categories = ["popular", "electric", "SUV", "recent"];
 
@@ -10,7 +11,7 @@ const ShopSection = () => {
  const [selectedCategory, setSelectedCategory] = useState("popular");
  return (
   <section className="contain mt-20">
-   <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Shop vehicles</h2>
+   <TitleH2 title="Shop Vehicles" />
    <ul className="mt-7 flex justify-center items-center gap-6 border-b pb-2">
     {categories.map((category) => (
      <li key={category}>

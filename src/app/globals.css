@@ -80,3 +80,16 @@
 .contain {
  @apply mx-auto max-w-[90rem] px-4;
 }
+
+.fastFadeIn {
+ animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+ from {
+  opacity: 0;
+ }
+ to {
+  opacity: 1;
+ }
+}

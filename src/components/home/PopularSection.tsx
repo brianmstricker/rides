@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import PopularSectionCard from "./PopularSectionCard";
 import { electricCards, popularCards, SUVCards, truckCards } from "./PopularCardInfo";
-import { InView, useInView } from "react-intersection-observer";
 
 const categories = ["popular", "electric", "SUV", "truck"];
 
@@ -12,17 +11,27 @@ const PopularSection = () => {
  return (
   <section className="contain mt-20">
    <h2 className="text-center text-[7vw] sm:text-4xl font-bold">Popular vehicles</h2>
-   <ul className="mt-7 flex justify-center items-center gap-6 border-b [&>*]:pb-2">
+   <ul className="mt-7 flex justify-center items-center gap-6 border-b pb-2">
     {categories.map((category) => (
-     <li
-      key={category}
-      onClick={() => setSelectedCategory(category)}
-      className={cn(
-       "capitalize border-b-[3px] border-transparent cursor-pointer transition-all duration-300",
-       selectedCategory === category && "border-b-blue-600"
-      )}
-     >
-      {category}
+     <li key={category}>
+      <button
+       onClick={() => {
+        setSelectedCategory(category);
+       }}
+       className={cn(
+        "capitalize cursor-pointer transition-all duration-300 relative outline-none hover:text-mainPurple focus:text-mainPurple",
+        selectedCategory === category && "pointer-events-none"
+       )}
+       tabIndex={category === selectedCategory ? -1 : 0}
+      >
+       <span>{category}</span>
+       <div
+        className={cn(
+         "w-full h-[3px] bg-mainPurple transition-all duration-300 scale-x-0 absolute -bottom-2",
+         selectedCategory === category && "scale-x-100"
+        )}
+       />
+      </button>
      </li>
     ))}
    </ul>

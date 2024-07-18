@@ -41,8 +41,8 @@ const PopularSectionCard = ({
  }, []);
  return (
   <>
-   {!isImageLoaded && <Skeleton className="w-[230px] h-[314px] mb-2 block" />}
-   <div ref={cardRef} className={cn("min-w-[230px] pb-2", !isImageLoaded && "opacity-0 w-0 h-0 absolute")}>
+   {!isImageLoaded && <Skeleton className="w-[230px] h-[314.5px] mb-2 block" />}
+   <div ref={cardRef} className={cn("min-w-[230px] pb-2", !isImageLoaded ? "opacity-0 w-0 h-0 absolute" : "fastFadeIn")}>
     <InView as="div" className={cn(!isInView && "opacity-50")} threshold={0.95} onChange={(inView) => setIsInView(inView)}>
      <div className="relative w-full h-40">
       <Image src={image} alt={title} fill className="object-cover rounded-t-md" onLoad={() => setIsImageLoaded(true)} />

@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
-import ThemeToggleButton from "./ThemeToggleButton";
-import NavSearch from "./navbar/NavSearch";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import CarCard from "./home/CarCard";
+import ThemeToggleButton from "../providers/ThemeToggleButton";
+import { Button } from "../ui/button";
+import NavSearch from "./NavSearch";
 
 type NavOption = {
  name: string;

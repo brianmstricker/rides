@@ -18,7 +18,7 @@ const PopularSectionCard = ({
   text: string;
  }[];
 }) => {
- // todo: animations
+ // todo: animations, maybe show skeleton loader until image is loaded
  const [isInView, setIsInView] = useState(false);
  return (
   <InView

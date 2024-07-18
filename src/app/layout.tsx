@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import Navbar from "@/components/Navbar";
-import { ScrollProvider } from "@/components/ScrollProvider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ScrollProvider } from "@/components/providers/ScrollProvider";
+import Navbar from "@/components/navbar/Navbar";
 
 const font = Inter({ subsets: ["latin"], variable: "--font-sans" });
 

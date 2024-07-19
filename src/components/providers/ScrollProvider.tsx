@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export function ScrollProvider({ children }: Readonly<{ children: React.ReactNode }>) {
  const [mounted, setMounted] = useState(false);
  const [isRestoring, setIsRestoring] = useState(true);
+ const [prevPath, setPrevPath] = useState("");
  const path = usePathname();
  useEffect(() => setMounted(true), []);
  useEffect(() => {
@@ -23,7 +24,12 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
    const scrollPosition = sessionStorage.getItem("scrollPosition");
    const navigationEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
    if (scrollPosition && navigationEntries[0]?.type === "reload") {
-    window.scrollTo(0, parseFloat(scrollPosition));
+    setPrevPath(path);
+    if (prevPath && prevPath !== path) {
+     window.scrollTo(0, 0);
+    } else {
+     window.scrollTo(0, parseFloat(scrollPosition));
+    }
    } else {
     window.scrollTo(0, 0);
    }

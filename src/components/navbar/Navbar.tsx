@@ -24,7 +24,7 @@ const Navbar = () => {
    <div className="contain h-full">
     <div className="flex justify-between items-center h-full">
      <Link href="/" className="text-3xl font-bold tracking-wide italic relative group">
-      <span className="group-hover:text-mainPurple transition-colors duration-300">rides</span>
+      <span className="px-0.5 group-hover:text-mainPurple transition-colors duration-300">rides</span>
       <div className="w-full bg-mainPurple h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-300 origin-left" />
      </Link>
      <div className="flex items-center gap-3 sm:gap-8 text-[15px]">

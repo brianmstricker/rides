@@ -20,30 +20,39 @@ const ShopSectionCard = ({
   text: string;
  }[];
 }) => {
- // todo: animations, maybe show skeleton loader until image is loaded
+ // todo: animations, maybe show skeleton loader only over image
  const [isInView, setIsInView] = useState(false);
  const [isImageLoaded, setIsImageLoaded] = useState(false);
  const cardRef = useRef<HTMLDivElement>(null);
+ const handleVisibility = () => {
+  if (!cardRef.current) return;
+  const cardRect = cardRef.current.getBoundingClientRect();
+  const inView = cardRect.left >= 0 && cardRect.right <= window.innerWidth;
+  setIsInView(inView);
+ };
  useEffect(() => {
-  const handleScroll = () => {
-   if (!cardRef.current) return;
-   const cardRect = cardRef.current.getBoundingClientRect();
-   const inView = cardRect.left >= 0 && cardRect.right <= window.innerWidth;
-   setIsInView(inView);
-  };
-  window.addEventListener("scroll", handleScroll);
-  window.addEventListener("resize", handleScroll);
-  handleScroll();
+  const initialCheckTimer = setTimeout(() => {
+   handleVisibility();
+  }, 100);
+  window.addEventListener("scroll", handleVisibility);
+  window.addEventListener("resize", handleVisibility);
+  handleVisibility();
   return () => {
-   window.removeEventListener("scroll", handleScroll);
-   window.removeEventListener("resize", handleScroll);
+   clearTimeout(initialCheckTimer);
+   window.removeEventListener("scroll", handleVisibility);
+   window.removeEventListener("resize", handleVisibility);
   };
  }, []);
  return (
   <>
    {!isImageLoaded && <Skeleton className="w-[230px] h-[314.5px] mb-2 block" />}
    <div ref={cardRef} className={cn("min-w-[230px] pb-2", !isImageLoaded ? "opacity-0 w-0 h-0 absolute" : "fastFadeIn")}>
-    <InView as="div" className={cn(!isInView && "opacity-50")} threshold={0.95} onChange={(inView) => setIsInView(inView)}>
+    <InView
+     as="div"
+     className={cn("transition-opacity duration-500", isImageLoaded && !isInView && "opacity-50")}
+     threshold={0.8}
+     onChange={(inView) => setIsInView(inView)}
+    >
      <div className="relative w-full h-40">
       <Image src={image} alt={title} fill className="object-cover rounded-t-md" onLoad={() => setIsImageLoaded(true)} />
      </div>

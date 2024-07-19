@@ -4,6 +4,7 @@ import BrowseByType from "@/components/home/BrowseByType";
 import HomeSearchBar from "@/components/home/HomeSearchBar";
 
 const HeroSection = () => {
+ // todo: add arrows to switch between images of popular/new vehicles like https://www.pinterest.com/pin/250301691774049811/?e_t=9f96b4337c8244ea9bd4eb701677f9d8
  return (
   <section className="relative w-full min-h-[calc(100vh-4rem)] flex items-center justify-center">
    <Image

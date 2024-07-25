@@ -4,9 +4,9 @@ import TitleH2 from "../global/TitleH2";
 
 const ChooseUsSection = () => {
  return (
-  <section className="contain mt-20">
+  <section className="contain mt-24">
    <TitleH2 title="Why Choose Us?" />
-   <div className="grid grid-cols-1 min-[500px]:grid-cols-2 lg:grid-cols-4 gap-6 mt-7">
+   <div className="grid grid-cols-1 min-[500px]:grid-cols-2 lg:grid-cols-4 gap-6">
     <ChooseUsCard
      title="Convenience"
      icon={CheckCircle}

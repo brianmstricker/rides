@@ -10,9 +10,9 @@ const categories = ["popular", "electric", "SUV", "recent"];
 const ShopSection = () => {
  const [selectedCategory, setSelectedCategory] = useState("popular");
  return (
-  <section className="contain mt-20">
+  <section className="contain mt-24">
    <TitleH2 title="Shop Vehicles" />
-   <ul className="mt-7 flex justify-center items-center gap-6 border-b pb-2">
+   <ul className="flex justify-center items-center gap-6 border-b pb-2">
     {categories.map((category) => (
      <li key={category}>
       <button

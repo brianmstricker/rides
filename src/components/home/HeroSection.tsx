@@ -22,7 +22,7 @@ const HeroSection = () => {
     <h1 className="text-center text-[7vw] sm:text-5xl md:text-6xl tracking-wider font-bold leading-relaxed">Find the perfect ride</h1>
     <div className="max-w-[650px] px-2">
      <HomeSearchBar />
-     <div className="mt-2 text-center">or</div>
+     <div className="mt-6 text-center">or</div>
      <BrowseByType />
     </div>
    </div>

@@ -1,6 +1,7 @@
 import BrandSection from "@/components/home/BrandSection";
 import ChooseUsSection from "@/components/home/ChooseUsSection";
 import HeroSection from "@/components/home/HeroSection";
+import ReviewSection from "@/components/home/ReviewSection";
 import ShopSection from "@/components/home/ShopSection";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
    <ShopSection />
    <BrandSection />
    <ChooseUsSection />
-   {/* todo: customer review section: https://dribbble.com/shots/16811232-Car-Rental-Landing-Page */}
+   <ReviewSection />
   </main>
  );
 }

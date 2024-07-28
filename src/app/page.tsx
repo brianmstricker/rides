@@ -6,7 +6,7 @@ import ShopSection from "@/components/home/ShopSection";
 
 export default function Home() {
  return (
-  <main className="pb-10">
+  <main className="pb-24">
    <HeroSection />
    <ShopSection />
    <BrandSection />

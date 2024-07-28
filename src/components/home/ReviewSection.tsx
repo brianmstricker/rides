@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const ReviewSection = () => {
+ // todo: redesign https://www.pinterest.com/pin/805511083364130713/
  const [cardToRender, setCardToRender] = useState(0);
  function nextCard() {
   setCardToRender((prev) => (prev === 4 ? 0 : prev + 1));

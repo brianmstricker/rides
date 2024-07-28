@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ScrollProvider } from "@/components/providers/ScrollProvider";
 import Navbar from "@/components/navbar/Navbar";
 import { headerFont, mainFont } from "./fonts";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
  title: "rides • Car marketplace",
@@ -21,9 +22,10 @@ export default function RootLayout({
    <body className={cn("min-h-screen bg-background text-foreground font-sans antialiased", mainFont.variable, headerFont.variable)}>
     <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
      <ScrollProvider>
-      <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+      <div className="min-h-[100dvh] flex flex-col">
        <Navbar />
-       <div className="pt-16 overflow-hidden">{children}</div>
+       <div className="pt-16 overflow-hidden grow">{children}</div>
+       <Footer />
       </div>
      </ScrollProvider>
     </ThemeProvider>

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import ThemeToggleButton from "../providers/ThemeToggleButton";
 import { Button } from "../ui/button";
 import NavSearch from "./NavSearch";
+import LoginButton from "./LoginButton";
 
 type NavOption = {
  name: string;
@@ -59,9 +60,12 @@ const Navbar = () => {
       <NavSearch />
      </div>
      <div className="flex items-center gap-3">
-      <Button variant="main" className="text-[15px]">
-       Login
-      </Button>
+      <LoginButton />
+      {/* <Button asChild variant="main">
+       <Link scroll={false} href="/sign-in" className="text-[15px]">
+        Login
+       </Link>
+      </Button> */}
       <ThemeToggleButton />
      </div>
     </div>

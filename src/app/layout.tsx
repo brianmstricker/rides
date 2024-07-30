@@ -15,8 +15,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
  children,
+ modal,
 }: Readonly<{
  children: React.ReactNode;
+ modal: React.ReactNode;
 }>) {
  return (
   <ClerkProvider>
@@ -26,7 +28,10 @@ export default function RootLayout({
       <ScrollProvider>
        <div className="min-h-[100dvh] flex flex-col">
         <Navbar />
-        <div className="pt-16 overflow-hidden grow">{children}</div>
+        <div className="pt-16 overflow-hidden grow flex flex-col">
+         {modal}
+         {children}
+        </div>
         <Footer />
        </div>
       </ScrollProvider>

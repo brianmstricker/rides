@@ -21,6 +21,10 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
  }, []);
  useEffect(() => {
   if (mounted) {
+   if (path === "/sign-in") {
+    setIsRestoring(false);
+    return;
+   }
    const scrollPosition = sessionStorage.getItem("scrollPosition");
    const navigationEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
    if (scrollPosition && navigationEntries[0]?.type === "reload") {

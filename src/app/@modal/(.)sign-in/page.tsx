@@ -14,7 +14,10 @@ const page = () => {
  const darkMode = theme === "dark";
  return (
   <Dialog defaultOpen open>
-   <DialogOverlay onClick={() => router.back()} className="bg-black/80 w-full h-full inset-0 fixed z-[5] flex items-center justify-center">
+   <DialogOverlay
+    // onClick={() => router.back()}
+    className="bg-black/80 w-full h-full inset-0 fixed z-[5] flex items-center justify-center"
+   >
     <DialogContent>
      <DialogHeader>
       <DialogTitle className="sr-only">Login</DialogTitle>

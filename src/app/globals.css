@@ -95,6 +95,5 @@
 }
 
 .cl-avatarBox {
- width: 2.25rem;
- height: 2.25rem;
+ @apply w-[1.75rem] h-[1.75rem] sm:w-[2.1rem] sm:h-[2.1rem];
 }

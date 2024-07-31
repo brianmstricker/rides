@@ -28,7 +28,7 @@ export default function RootLayout({
       <ScrollProvider>
        <div className="min-h-[100dvh] flex flex-col">
         <Navbar />
-        <div className="pt-[6.75rem] min-[800px]:pt-16 overflow-hidden grow flex flex-col">
+        <div className="pt-12 sm:pt-16 overflow-hidden grow flex flex-col">
          {modal}
          {children}
         </div>

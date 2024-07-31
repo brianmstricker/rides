@@ -36,7 +36,7 @@ const NavSearch = () => {
     ref={inputRef}
     placeholder="search"
     className={cn(
-     "transition-all duration-300 scale-0 opacity-0 w-0 absolute text-xs lg:text-[15px]",
+     "transition-all duration-300 scale-0 opacity-0 w-0 absolute text-sm lg:text-[15px]",
      isExpandSearch && "scale-100 opacity-100 w-full"
     )}
     value={searchText}
@@ -49,7 +49,7 @@ const NavSearch = () => {
     onClick={handleSearchClick}
     onFocus={() => setIsExpandSearch(true)}
    >
-    <Search className="w-[20px] lg:w-[24px]" />
+    <Search className="w-[16px] h-[16px] lg:w-[22px] lg:h-[22px]" />
    </Button>
   </div>
  );

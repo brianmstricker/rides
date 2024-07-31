@@ -23,21 +23,21 @@ const Navbar = async () => {
  // todo: add border on scroll border-b-4 border-b-mainPurple
  const user = await currentUser();
  return (
-  <div className="bg-primary-foreground text-foreground h-16 top-0 w-full z-10 absolute min-[800px]:fixed">
+  <div className="bg-primary-foreground text-foreground h-12 sm:h-16 top-0 w-full z-10 fixed">
    <div className="contain h-full">
     <div className="flex justify-between items-center h-full">
-     <Link href="/" className="text-xl lg:text-3xl font-bold tracking-wide italic relative group">
+     <Link href="/" className="text-2xl lg:text-3xl font-bold tracking-wide italic relative group">
       <span className="px-0.5 group-hover:text-mainPurple transition-colors duration-300">rides</span>
       <div className="w-full bg-mainPurple h-1 absolute scale-0 group-hover:scale-100 transition-transform duration-300 origin-left" />
      </Link>
-     <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 text-xs md:text-[15px] absolute left-1/2 -translate-x-1/2 translate-y-12 min-[800px]:translate-y-0 bg-primary-foreground py-3 min-[800px]:py-0 w-full min-[800px]:w-auto justify-center min-[800px]:justify-normal">
+     <div className="hidden sm:flex items-center gap-2 sm:gap-4 lg:gap-8 text-sm lg:text-base">
       {NavOptions.map((option) => (
        <div className="relative group" key={option.name}>
         <Link
          href={option.href}
          className={cn(
           "flex items-center gap-[2px] whitespace-nowrap transition-all duration-300 py-1 px-3 cursor-pointer select-none group-hover:bg-secondary",
-          option.submenu ? "rounded-t-md rounded-b-md sm:rounded-b-none" : "rounded-md py-2"
+          option.submenu ? "rounded-t-md rounded-b-md sm:rounded-b-none" : "rounded-md"
          )}
         >
          <span className="block sm:hidden">{option.name.split(" ")[0]}</span>
@@ -64,7 +64,7 @@ const Navbar = async () => {
        <NavSearch />
       </div>
      </div>
-     <div className="flex items-center gap-3">
+     <div className="flex items-center gap-1.5 sm:gap-3">
       {!!user ? <UserMenu /> : <LoginButton />}
       <ThemeToggleButton />
      </div>

@@ -30,12 +30,15 @@ const NavSearch = () => {
  return (
   <div
    ref={searchRef}
-   className={cn("flex items-center relative w-[36px] transition-all duration-300 -left-2", isExpandSearch && "w-[200px]")}
+   className={cn("flex items-center relative w-[36px] transition-all duration-300 lg:-left-2", isExpandSearch && "w-[150px] lg:w-[200px]")}
   >
    <Input
     ref={inputRef}
     placeholder="search"
-    className={cn("transition-all duration-300 scale-0 opacity-0 w-0 absolute", isExpandSearch && "scale-100 opacity-100 w-full")}
+    className={cn(
+     "transition-all duration-300 scale-0 opacity-0 w-0 absolute text-xs lg:text-[15px]",
+     isExpandSearch && "scale-100 opacity-100 w-full"
+    )}
     value={searchText}
     onChange={(e) => setSearchText(e.target.value)}
     tabIndex={isExpandSearch ? 0 : -1}
@@ -46,7 +49,7 @@ const NavSearch = () => {
     onClick={handleSearchClick}
     onFocus={() => setIsExpandSearch(true)}
    >
-    <Search size={20} />
+    <Search className="w-[20px] lg:w-[24px]" />
    </Button>
   </div>
  );

@@ -93,3 +93,8 @@
   opacity: 1;
  }
 }
+
+.cl-avatarBox {
+ width: 2.25rem;
+ height: 2.25rem;
+}

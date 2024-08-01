@@ -65,7 +65,7 @@ const Navbar = async () => {
       </div>
      </div>
      <div className="flex items-center gap-1.5 sm:gap-3">
-      {!!user ? <UserMenu /> : <LoginButton />}
+      {!!user ? <UserMenu image={user.imageUrl} /> : <LoginButton />}
       <ThemeToggleButton />
      </div>
     </div>

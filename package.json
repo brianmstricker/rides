@@ -18,11 +18,11 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.417.0",
+    "lucide-react": "^0.418.0",
     "mongoose": "^8.5.2",
     "next": "14.2.5",
     "next-themes": "^0.3.0",
-    "npm-check-updates": "^16.14.20",
+    "npm-check-updates": "^17.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.13.0",
@@ -30,7 +30,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^22.0.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^9.8.0",

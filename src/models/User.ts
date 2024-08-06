@@ -4,6 +4,7 @@ const UserSchema = new Schema(
  {
   userId: {},
   saved_listings: {},
+  notifications: {},
  },
  { timestamps: true }
 );

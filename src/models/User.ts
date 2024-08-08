@@ -5,6 +5,7 @@ const UserSchema = new Schema(
   userId: {},
   saved_listings: {},
   notifications: {},
+  isAdmin: { type: Boolean, default: false },
  },
  { timestamps: true }
 );

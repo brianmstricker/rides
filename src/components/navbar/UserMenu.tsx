@@ -1,7 +1,7 @@
 "use client";
 import useUserMenu from "@/hooks/useUserMenu";
 import { cn } from "@/lib/utils";
-import { UserButton } from "@clerk/nextjs";
+import { SignOutButton, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Cog, Heart, LogOut, User2 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -71,7 +71,11 @@ const UserMenu = ({ image, username, fName }: UserMenuProps) => {
       <MenuItem icon={<User2 size={20} />} text="Profile" />
       <MenuItem icon={<Cog size={20} />} text="Settings" />
       <div className="w-full bg-border h-[1px] my-2 scale-150" />
-      <MenuItem icon={<LogOut size={20} />} text="Logout" />
+      <SignOutButton>
+       <button className="w-full">
+        <MenuItem icon={<LogOut size={20} />} text="Logout" />
+       </button>
+      </SignOutButton>
      </div>
     )}
    </div>

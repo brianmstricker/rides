@@ -21,7 +21,8 @@ const NavOptions: NavOption[] = [
 
 const Navbar = async () => {
  // todo: add border on scroll border-b-4 border-b-mainPurple
- const user = await currentUser();
+ const userClerk = await currentUser();
+ // todo: get user from db and use that username
  return (
   <div className="bg-primary-foreground text-foreground h-12 sm:h-16 top-0 w-full z-10 fixed">
    <div className="contain h-full">
@@ -65,7 +66,12 @@ const Navbar = async () => {
       </div>
      </div>
      <div className="flex items-center gap-1.5 sm:gap-3">
-      {!!user ? <UserMenu image={user.imageUrl} username={user.username} fName={user.firstName} /> : <LoginButton />}
+      {/* todo: set username to user.username fetch from db */}
+      {!!userClerk ? (
+       <UserMenu image={userClerk.imageUrl} username={userClerk.username || ""} fName={userClerk.firstName} />
+      ) : (
+       <LoginButton />
+      )}
       <ThemeToggleButton />
      </div>
     </div>

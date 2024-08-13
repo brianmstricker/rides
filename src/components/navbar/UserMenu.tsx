@@ -1,11 +1,12 @@
 "use client";
 import useUserMenu from "@/hooks/useUserMenu";
 import { cn } from "@/lib/utils";
-import { SignOutButton, UserButton } from "@clerk/nextjs";
+import { SignOutButton, useAuth, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Cog, Heart, LogOut, User2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { toast } from "sonner";
 
 type UserMenuProps = {
  image: string | null;
@@ -27,6 +28,7 @@ function MenuItem({ icon, text }: { icon?: JSX.Element; text?: string }) {
 
 const UserMenu = ({ image, username, fName }: UserMenuProps) => {
  const { loadingImg, setLoadingImg, menuRef, onMenuClick, showMenu } = useUserMenu();
+ const { signOut } = useAuth();
  const { theme } = useTheme();
  const darkMode = theme === "dark";
  return (
@@ -71,11 +73,15 @@ const UserMenu = ({ image, username, fName }: UserMenuProps) => {
       <MenuItem icon={<User2 size={20} />} text="Profile" />
       <MenuItem icon={<Cog size={20} />} text="Settings" />
       <div className="w-full bg-border h-[1px] my-2 scale-150" />
-      <SignOutButton>
-       <button className="w-full">
-        <MenuItem icon={<LogOut size={20} />} text="Logout" />
-       </button>
-      </SignOutButton>
+      <button
+       className="w-full"
+       onClick={async () => {
+        await signOut();
+        toast("Logged out successfully.");
+       }}
+      >
+       <MenuItem icon={<LogOut size={20} />} text="Logout" />
+      </button>
      </div>
     )}
    </div>

@@ -3,7 +3,7 @@ import useUserMenu from "@/hooks/useUserMenu";
 import { cn } from "@/lib/utils";
 import { SignOutButton, useAuth, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Cog, Heart, LogOut, User2 } from "lucide-react";
+import { Cog, DollarSign, Heart, LogOut, Pen, User2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -72,6 +72,8 @@ const UserMenu = ({ image, username, fName }: UserMenuProps) => {
       <MenuItem icon={<Heart size={20} />} text="Favorites" />
       <MenuItem icon={<User2 size={20} />} text="Profile" />
       <MenuItem icon={<Cog size={20} />} text="Settings" />
+      <div className="w-full bg-border h-[1px] my-2 scale-150" />
+      <MenuItem icon={<DollarSign size={20} />} text="Sell vehicle" />
       <div className="w-full bg-border h-[1px] my-2 scale-150" />
       <button
        className="w-full"

@@ -3,11 +3,12 @@ import { UserModel } from "@/models/User";
 import { usernameSchema } from "@/schemas/user-schema";
 import { auth } from "@clerk/nextjs/server";
 
-export const getUsername = async ({ userId }: Readonly<{ userId: string }>): Promise<boolean | { error: string }> => {
+export const getUsername = async (): Promise<string | boolean | { error: string }> => {
  try {
-  if (!userId) return { error: "Missing user ID" };
-  const existingUsername = await UserModel.findOne({ clerkUserId: userId }).select("username").lean().exec();
-  if (existingUsername) return true;
+  const { userId } = auth();
+  if (!userId) return { error: "User not found" };
+  const existingUsername = await UserModel.findOne({ clerkUserId: userId }).select("username").exec();
+  if (existingUsername && existingUsername.username !== "") return existingUsername.username;
   return false;
  } catch (error: any) {
   console.error("getUsername error", error);
@@ -15,14 +16,20 @@ export const getUsername = async ({ userId }: Readonly<{ userId: string }>): Pro
  }
 };
 
-export const createUsername = async ({ username }: Readonly<{ username: string }>): Promise<string | { error: string }> => {
+export const createUserAndUsername = async ({ username }: Readonly<{ username: string }>): Promise<string | { error: string }> => {
  try {
   const { userId } = auth();
   if (!userId || !username) return { error: "Missing userId or username" };
   const { username: validatedUsername } = usernameSchema.parse({ username });
   if (!validatedUsername) return { error: "Invalid username." };
-  const existingUser = await UserModel.findOne({ username: validatedUsername });
-  if (existingUser) return { error: "Username already exists." };
+  const existingUsername = await UserModel.findOne({ username: validatedUsername });
+  if (existingUsername) return { error: "Username already exists." };
+  const existingUser = await UserModel.findOne({ clerkUserId: userId });
+  if (existingUser) {
+   existingUser.username = validatedUsername;
+   await existingUser.save();
+   return validatedUsername;
+  }
   const newUser = new UserModel({ clerkUserId: userId, username: validatedUsername });
   await newUser.save();
   return validatedUsername;

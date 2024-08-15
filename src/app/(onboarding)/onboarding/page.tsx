@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createUsername } from "@/actions/user-actions";
+import { createUserAndUsername } from "@/actions/user-actions";
 import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,7 @@ const Page = () => {
  });
  async function onSubmit(values: z.infer<typeof usernameSchema>) {
   const { username } = values;
-  const res = await createUsername({ username });
+  const res = await createUserAndUsername({ username });
   if (typeof res === "object") {
    form.setError("username", {
     type: "manual",

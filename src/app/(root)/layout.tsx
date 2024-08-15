@@ -17,9 +17,9 @@ export default async function MainLayout({
  } catch (error) {
   console.error("dbConnect error", error);
  }
- const user = await currentUser();
- if (user && user.id) {
-  const username = await getUsername({ userId: user.id });
+ const userClerk = await currentUser();
+ if (userClerk) {
+  const username = await getUsername();
   if (!username) {
    redirect("/onboarding");
   }

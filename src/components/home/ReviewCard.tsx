@@ -6,26 +6,24 @@ const ReviewCard = ({ i, className }: { i: number; className?: string }) => {
  let description = "";
  switch (i) {
   case 0:
-   classes = "md:translate-y-6 order-2 md:order-none";
+   classes = "order-2 md:order-none";
    description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Donec id felis eget libero ultricies aliquet. Donec id felis eget libero ultricies aliquet.";
    break;
   case 1:
-   classes =
-    "relative before:absolute before:border-yellow-600 before:border before:bg-background before:inset-0 before:z-[-1] before:-bottom-2 bg-background before:-left-2 before:mt-2 before:mr-2 sm:ml-2 order-1 md:order-none before:opacity-0 sm:before:opacity-100";
+   classes = "border-yellow-600/70 order-1 md:order-none";
    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
    break;
   case 2:
-   classes = "md:translate-y-6 order-3 md:order-none";
+   classes = "order-3 md:order-none";
    description = "Sed ut purus eget nunc. Donec id felis eget libero ultricies aliquet. Donec id felis eget libero ultricies aliquet.";
    break;
   case 3:
-   classes =
-    "flex flex-col md:hidden lg:flex relative before:absolute before:border-yellow-600 before:border before:bg-background before:inset-0 before:z-[-1] before:-bottom-2 bg-background before:-left-2 before:mt-2 before:mr-2 sm:ml-2 order-4 md:order-none before:opacity-0 sm:before:opacity-100";
+   classes = "border-yellow-600/70 flex flex-col md:hidden lg:flex order-4 md:order-none";
    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
    break;
   case 4:
-   classes = "flex flex-col sm:hidden xl:flex md:translate-y-6";
+   classes = "flex flex-col sm:hidden xl:flex";
    description = "Sed ut purus eget nunc. Donec id felis eget libero ultricies aliquet. Donec id felis eget libero ultricies aliquet.";
    break;
  }

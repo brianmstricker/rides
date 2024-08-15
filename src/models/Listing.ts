@@ -1,5 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
+// todo: add type
 const ListingSchema = new Schema(
  {
   userId: {

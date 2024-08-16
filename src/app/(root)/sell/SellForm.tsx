@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { PlusIcon } from "lucide-react";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
- return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-4">{children}</div>;
+ return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
 }
 
 const SellForm = () => {
@@ -39,7 +40,7 @@ const SellForm = () => {
  // todo: update features to be a list of checkboxes, click on the box to show modal with the a list of features
  return (
   <Form {...form}>
-   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
     <FormGroup>
      <FormField
       control={form.control}
@@ -158,7 +159,7 @@ const SellForm = () => {
        <FormItem>
         <FormLabel>Description *</FormLabel>
         <FormControl>
-         <Textarea {...field} />
+         <Textarea {...field} className="h-[5rem] resize-none" />
         </FormControl>
         <FormMessage />
         <FormDescription>Max. 500 characters</FormDescription>
@@ -172,14 +173,35 @@ const SellForm = () => {
        <FormItem>
         <FormLabel>Features</FormLabel>
         <FormControl>
-         <Input {...field} />
+         <Input {...field} className="h-[5rem]" />
         </FormControl>
         <FormMessage />
        </FormItem>
       )}
      />
     </FormGroup>
-    <div className="text-lg pt-6 relative top-1.5 font-bold">Misc.</div>
+    <div className="text-lg pt-1 relative top-1.5 font-bold">Images</div>
+    <input type="file" className="hidden" id="images" />
+    <label
+     htmlFor="images"
+     className="cursor-pointer flex items-center justify-center w-28 h-28 border border-dashed border-primary-foreground rounded-lg"
+    >
+     <PlusIcon className="w-8 h-8 text-primary-foreground" />
+    </label>
+    {/* <FormField
+     control={form.control}
+     name="images"
+     render={({ field }) => (
+      <FormItem>
+       <FormLabel>Image URLs *</FormLabel>
+       <FormControl>
+        <Input {...field} />
+       </FormControl>
+       <FormMessage />
+      </FormItem>
+     )}
+    /> */}
+    <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
     <FormGroup>
      <FormField
       control={form.control}

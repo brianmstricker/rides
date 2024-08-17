@@ -8,12 +8,16 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PlusIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
 }
 
 const SellForm = () => {
+ const [previewImages, setPreviewImages] = useState<string[]>([]);
+ const [imagesToUpload, setImagesToUpload] = useState<FileList | null>(null);
  const form = useForm<z.infer<typeof createListingSchema>>({
   resolver: zodResolver(createListingSchema),
   defaultValues: {
@@ -38,6 +42,23 @@ const SellForm = () => {
   console.log(values);
  }
  // todo: update features to be a list of checkboxes, click on the box to show modal with the a list of features
+ useEffect(() => {
+  if (!imagesToUpload) return;
+  const updatedImages = Array.from(imagesToUpload);
+  const updatedMediaArray = updatedImages.slice(0, 20);
+  const mediaUrlArray = updatedMediaArray.map((media) => URL.createObjectURL(media));
+  setPreviewImages(mediaUrlArray);
+  return () => {
+   mediaUrlArray.forEach((media) => URL.revokeObjectURL(media));
+  };
+ }, [imagesToUpload]);
+ useEffect(() => {
+  if (!previewImages || previewImages.length === 0) return;
+  previewImages.forEach((prev) => {
+   const img = document.createElement("img");
+   img.src = prev;
+  });
+ }, [previewImages]);
  return (
   <Form {...form}>
    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -181,26 +202,35 @@ const SellForm = () => {
      />
     </FormGroup>
     <div className="text-lg pt-1 relative top-1.5 font-bold">Images</div>
-    <input type="file" className="hidden" id="images" />
-    <label
-     htmlFor="images"
-     className="cursor-pointer flex items-center justify-center w-28 h-28 border border-dashed border-primary-foreground rounded-lg"
-    >
-     <PlusIcon className="w-8 h-8 text-primary-foreground" />
-    </label>
-    {/* <FormField
-     control={form.control}
-     name="images"
-     render={({ field }) => (
-      <FormItem>
-       <FormLabel>Image URLs *</FormLabel>
-       <FormControl>
-        <Input {...field} />
-       </FormControl>
-       <FormMessage />
-      </FormItem>
+    <div className="flex flex-wrap gap-3">
+     <input
+      type="file"
+      multiple={true}
+      className="hidden"
+      id="images"
+      onChange={(e) => {
+       setImagesToUpload(e.target.files);
+      }}
+     />
+     <label htmlFor="images" className="cursor-pointer flex items-center justify-center w-28 h-28 border rounded-lg shrink-0">
+      <PlusIcon className="w-8 h-8 text-muted-foreground" />
+     </label>
+     {previewImages.length > 0 && (
+      <>
+       {previewImages.map((img) => (
+        <Image
+         key={img}
+         src={img}
+         className="aspect-square rounded-lg max-w-[112px] max-h-[112px] border overflow-hidden"
+         alt=""
+         width={112}
+         height={112}
+         sizes="112px"
+        />
+       ))}
+      </>
      )}
-    /> */}
+    </div>
     <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
     <FormGroup>
      <FormField

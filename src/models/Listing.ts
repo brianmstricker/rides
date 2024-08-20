@@ -50,6 +50,13 @@ const ListingSchema = new Schema(
   },
   drivetrain: {
    type: String,
+   required: true,
+   validate: {
+    validator: (value: string) => {
+     return ["FWD", "RWD", "AWD"].includes(value.toUpperCase());
+    },
+    message: "Drivetrain must be one of FWD, RWD, AWD",
+   },
   },
   fuel_type: {
    type: String,
@@ -67,6 +74,9 @@ const ListingSchema = new Schema(
   },
   features: {
    type: [String],
+  },
+  mpg: {
+   type: Number,
   },
   is_active: { type: Boolean, default: false },
  },

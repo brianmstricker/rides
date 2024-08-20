@@ -11,6 +11,7 @@ import { Plus, PlusIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ImagePreview from "./ImagePreview";
 import FeaturesModal from "./FeaturesModal";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -40,6 +41,7 @@ const SellForm = () => {
    description: "",
    images: [],
    features: [],
+   mpg: undefined,
   },
  });
  function onSubmit(values: z.infer<typeof createListingSchema>) {
@@ -287,9 +289,24 @@ const SellForm = () => {
        name="drivetrain"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Drivetrain</FormLabel>
+         <FormLabel>Drivetrain*</FormLabel>
          <FormControl>
-          <Input {...field} />
+          <Select
+           onValueChange={(value) => {
+            form.setValue("drivetrain", value);
+           }}
+          >
+           <SelectTrigger>
+            <SelectValue placeholder="Select" />
+           </SelectTrigger>
+           <SelectContent>
+            <SelectGroup>
+             <SelectItem value="awd">AWD</SelectItem>
+             <SelectItem value="fwd">FWD</SelectItem>
+             <SelectItem value="rwd">RWD</SelectItem>
+            </SelectGroup>
+           </SelectContent>
+          </Select>
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -316,6 +333,19 @@ const SellForm = () => {
          <FormLabel>Engine</FormLabel>
          <FormControl>
           <Input {...field} />
+         </FormControl>
+         <FormMessage />
+        </FormItem>
+       )}
+      />
+      <FormField
+       control={form.control}
+       name="mpg"
+       render={({ field }) => (
+        <FormItem>
+         <FormLabel>MPG</FormLabel>
+         <FormControl>
+          <Input {...field} type="number" />
          </FormControl>
          <FormMessage />
         </FormItem>

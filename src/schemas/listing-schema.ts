@@ -16,7 +16,7 @@ export const createListingSchema = z.object({
   .max(20, "Exterior color must be at most 20 characters long"),
  interior_color: z.string().optional(),
  transmission: z.string().optional(),
- drivetrain: z.string().optional(),
+ drivetrain: z.string().min(1, "Drivetrain is required"),
  fuel_type: z.string().optional(),
  engine: z.string().optional(),
  description: z
@@ -25,4 +25,5 @@ export const createListingSchema = z.object({
   .max(500, "Description must be at most 500 characters long"),
  images: z.array(z.string()).min(1, "Images must have at least 1 item"),
  features: z.array(z.string()).optional(),
+ mpg: z.number().optional(),
 });

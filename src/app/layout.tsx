@@ -21,7 +21,7 @@ export default async function RootLayout({
   <ClerkProvider>
    <html lang="en" suppressHydrationWarning>
     <body className={cn("min-h-screen bg-background text-foreground font-sans antialiased", mainFont.variable, headerFont.variable)}>
-     <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+     <ThemeProvider attribute="class" disableTransitionOnChange>
       <ScrollProvider>
        <Toaster />
        {children}

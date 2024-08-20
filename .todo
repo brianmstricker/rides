@@ -15,3 +15,4 @@
 -remember sizes for images
 -welcome banner/message
 -protected routes <https://clerk.com/docs/references/nextjs/clerk-middleware>
+-this for img upload <https://react-dropzone.js.org/>

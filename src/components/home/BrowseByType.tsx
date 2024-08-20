@@ -1,4 +1,4 @@
-import { Car, Caravan, CarFront, Gauge, Rabbit, Truck, Zap } from "lucide-react";
+import { Car, Caravan, CarFront, Flag, Gauge, Rabbit, Truck, Zap } from "lucide-react";
 import TypeCard from "./TypeCard";
 
 const BrowseByType = () => {
@@ -14,7 +14,7 @@ const BrowseByType = () => {
     <div className="flex gap-4">
      <TypeCard label="Van" icon={Caravan} />
      <TypeCard label="Coupe" icon={CarFront} />
-     <TypeCard label="Sport" icon={Rabbit} />
+     <TypeCard label="Sport" icon={Flag} />
     </div>
    </div>
   </div>

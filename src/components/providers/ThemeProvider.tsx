@@ -7,5 +7,14 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
  const [mounted, setMounted] = useState(false);
  useEffect(() => setMounted(true), []);
  if (!mounted) return null;
- return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+ return (
+  <NextThemesProvider
+   {...props}
+   defaultTheme={
+    props.defaultTheme || (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+   }
+  >
+   {children}
+  </NextThemesProvider>
+ );
 }

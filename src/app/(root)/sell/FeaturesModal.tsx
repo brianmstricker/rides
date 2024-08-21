@@ -44,6 +44,7 @@ const FeaturesModal = ({
  setFeatures,
  customFeatureInput,
  setCustomFeatureInput,
+ featuresButtonRef,
 }: {
  setShowFeaturesModal: (value: boolean) => void;
  customFeatures: string[];
@@ -52,6 +53,7 @@ const FeaturesModal = ({
  setFeatures: Dispatch<SetStateAction<string[]>>;
  customFeatureInput: string;
  setCustomFeatureInput: Dispatch<SetStateAction<string>>;
+ featuresButtonRef: React.RefObject<HTMLButtonElement>;
 }) => {
  // todo: potentially save custom features to local storage
  const previousFeaturesRef = useRef(features);
@@ -84,10 +86,12 @@ const FeaturesModal = ({
    ? (uniqueFeatures = [...features, ...customFeatures].filter((f, i, self) => self.indexOf(f) === i))
    : (uniqueFeatures = [...new Set([...previousFeaturesArray, ...customFeatures])]);
   JSON.stringify(previousFeaturesArray) !== JSON.stringify(uniqueFeatures) && toast.success("Features updated");
+  setCustomFeatureInput("");
   setFeatures(uniqueFeatures);
   setShowFeaturesModal(false);
-  setCustomFeatureInput("");
-  customInputRef.current?.focus();
+  setTimeout(() => {
+   featuresButtonRef?.current?.focus();
+  }, 0);
  }
  function removeFeature(feature: string) {
   setCustomFeatures(customFeatures.filter((f) => f !== feature));
@@ -108,6 +112,7 @@ const FeaturesModal = ({
    defaultOpen
    onOpenChange={() => {
     updateFeatures({ close: true });
+    featuresButtonRef?.current?.focus();
    }}
   >
    <DialogContent className="max-w-7xl" onPointerDownOutside={(e) => e.preventDefault()}>
@@ -160,6 +165,8 @@ const FeaturesModal = ({
         maxLength={25}
        />
        <button
+        type="button"
+        tabIndex={customFeatureInput.trim().length > 0 ? 0 : -1}
         className={cn(
          "ml-2 text-primary absolute right-2 hover:font-bold px-1",
          customFeatureInput.trim().length > 0

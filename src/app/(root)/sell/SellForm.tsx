@@ -349,6 +349,7 @@ const SellForm = () => {
      setFeatures={setFeatures}
      customFeatureInput={customFeatureInput}
      setCustomFeatureInput={setCustomFeatureInput}
+     featuresButtonRef={featuresButtonRef}
     />
    )}
    {selectedImageForModal && (

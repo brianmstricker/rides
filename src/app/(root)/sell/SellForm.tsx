@@ -12,6 +12,8 @@ import { useEffect, useRef, useState } from "react";
 import ImagePreview from "./ImagePreview";
 import FeaturesModal from "./FeaturesModal";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import ImageInput from "./ImageInput";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -22,7 +24,12 @@ const SellForm = () => {
  const [previewImages, setPreviewImages] = useState<File[]>([]);
  const [imagesToUpload, setImagesToUpload] = useState<FileList | null | File[]>(null);
  const [showFeaturesModal, setShowFeaturesModal] = useState(false);
- const previewInputRef = useRef<HTMLInputElement>(null);
+ const [customFeatureInput, setCustomFeatureInput] = useState("");
+ const [customFeatures, setCustomFeatures] = useState<string[]>([]);
+ const [features, setFeatures] = useState<string[]>([]);
+ const imageInputRef = useRef<HTMLInputElement>(null);
+ const featuresButtonRef = useRef<HTMLButtonElement>(null);
+ const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
  const form = useForm<z.infer<typeof createListingSchema>>({
   resolver: zodResolver(createListingSchema),
   defaultValues: {
@@ -47,10 +54,10 @@ const SellForm = () => {
  function onSubmit(values: z.infer<typeof createListingSchema>) {
   console.log(values);
  }
- function clearAll() {
+ function clearAllImagePreviews() {
   setPreviewImages([]);
   setImagesToUpload(null);
-  if (previewInputRef.current) previewInputRef.current.value = "";
+  if (imageInputRef.current) imageInputRef.current.value = "";
  }
  useEffect(() => {
   if (!imagesToUpload) return;
@@ -69,9 +76,16 @@ const SellForm = () => {
    const img = document.createElement("img");
    img.src = url;
    img.onload = () => URL.revokeObjectURL(url);
-   if (previewInputRef.current) previewInputRef.current.value = "";
+   if (imageInputRef.current) imageInputRef.current.value = "";
   });
  }, [previewImages, previewImages.length]);
+ useEffect(() => {
+  const featuresButton = featuresButtonRef.current;
+  const textarea = descriptionTextareaRef.current;
+  if (featuresButton && textarea) {
+   textarea.style.height = `${featuresButton.offsetHeight}px`;
+  }
+ }, [features]);
  return (
   <>
    <Form {...form}>
@@ -194,7 +208,7 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Description *</FormLabel>
          <FormControl>
-          <Textarea {...field} className="h-[5rem] resize-none" maxLength={500} />
+          <Textarea {...field} className="min-h-[5rem] max-h-[15rem] resize-none" maxLength={500} ref={descriptionTextareaRef} />
          </FormControl>
          <FormMessage />
          <FormDescription>Max. 500 characters</FormDescription>
@@ -210,15 +224,28 @@ const SellForm = () => {
          <FormControl>
           <button
            type="button"
-           className="h-[5rem] w-full border rounded-md border-input shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center"
+           ref={featuresButtonRef}
+           className={cn(
+            "min-h-[5rem] w-full border rounded-md border-input shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 flex",
+            features.length === 0 && "justify-center items-center"
+           )}
            onClick={() => setShowFeaturesModal(true)}
           >
-           <div className="flex items-center gap-2">
-            <Plus />
-            <span>Click to add</span>
-           </div>
+           {features.length === 0 ? (
+            <div className="flex items-center gap-2">
+             <Plus />
+             <span>Click to add</span>
+            </div>
+           ) : (
+            <div className="h-full p-2 text-sm flex flex-wrap gap-2">
+             {features.map((feature, i) => (
+              <div key={i} className="truncate capitalize">
+               • {feature}
+              </div>
+             ))}
+            </div>
+           )}
           </button>
-          {/* <Input {...field} className="h-[5rem]" /> */}
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -230,45 +257,18 @@ const SellForm = () => {
        Images*<span className="text-sm ml-2">(20 max)</span>
       </div>
       {previewImages && previewImages.length > 0 && (
-       <button className="text-sm px-0.5" type="button" onClick={clearAll}>
+       <button className="text-sm px-0.5" type="button" onClick={clearAllImagePreviews}>
         Clear all
        </button>
       )}
      </div>
-     <div className="grid min-[360px]:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-      <input
-       ref={previewInputRef}
-       type="file"
-       multiple={true}
-       className="hidden"
-       id="images"
-       onChange={(e) => {
-        if (!e.target.files) return;
-        const newFiles = Array.from(e.target.files);
-        const updatedFiles = Array.from(imagesToUpload || []);
-        const combinedFiles = [...updatedFiles, ...newFiles];
-        setImagesToUpload(combinedFiles);
-       }}
-      />
-      <label htmlFor="images" className="cursor-pointer flex items-center justify-center w-full aspect-square border rounded-lg shrink-0">
-       <PlusIcon className="w-10 h-10 min-[360px]:w-8 min-[360px]:h-8" />
-      </label>
-      {previewImages.length > 0 && (
-       <>
-        {previewImages.map((img, i) => (
-         <ImagePreview
-          key={i}
-          setPreviewImages={setPreviewImages}
-          setImagesToUpload={setImagesToUpload}
-          previewImages={previewImages}
-          img={img}
-          previewInputRef={previewInputRef}
-          thumbnail={i === 0 ? true : false}
-         />
-        ))}
-       </>
-      )}
-     </div>
+     <ImageInput
+      imageInputRef={imageInputRef}
+      imagesToUpload={imagesToUpload}
+      setImagesToUpload={setImagesToUpload}
+      previewImages={previewImages}
+      setPreviewImages={setPreviewImages}
+     />
      <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
      <FormGroup>
       <FormField
@@ -357,7 +357,17 @@ const SellForm = () => {
      </div>
     </form>
    </Form>
-   {showFeaturesModal && <FeaturesModal setShowFeaturesModal={setShowFeaturesModal} />}
+   {showFeaturesModal && (
+    <FeaturesModal
+     setShowFeaturesModal={setShowFeaturesModal}
+     customFeatures={customFeatures}
+     setCustomFeatures={setCustomFeatures}
+     features={features}
+     setFeatures={setFeatures}
+     customFeatureInput={customFeatureInput}
+     setCustomFeatureInput={setCustomFeatureInput}
+    />
+   )}
   </>
  );
 };

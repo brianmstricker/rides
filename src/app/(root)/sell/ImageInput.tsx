@@ -54,7 +54,12 @@ const ImageInput = ({
      setImagesToUpload(combinedFiles);
     }}
    />
-   <label htmlFor="images" className="cursor-pointer flex items-center justify-center w-full aspect-square border rounded-lg shrink-0">
+   <label
+    tabIndex={0}
+    onKeyDown={(e) => e.key === "Enter" && imageInputRef.current?.click()}
+    htmlFor="images"
+    className="cursor-pointer flex items-center justify-center w-full aspect-square border rounded-lg shrink-0"
+   >
     <PlusIcon className="w-10 h-10 min-[360px]:w-8 min-[360px]:h-8" />
    </label>
    {previewImages.length > 0 && (

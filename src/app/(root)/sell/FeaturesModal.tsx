@@ -45,6 +45,7 @@ const FeaturesModal = ({
  customFeatureInput,
  setCustomFeatureInput,
  featuresButtonRef,
+ descriptionTextareaRef,
 }: {
  setShowFeaturesModal: (value: boolean) => void;
  customFeatures: string[];
@@ -54,6 +55,7 @@ const FeaturesModal = ({
  customFeatureInput: string;
  setCustomFeatureInput: Dispatch<SetStateAction<string>>;
  featuresButtonRef: React.RefObject<HTMLButtonElement>;
+ descriptionTextareaRef: React.RefObject<HTMLTextAreaElement>;
 }) => {
  // todo: potentially save custom features to local storage
  const previousFeaturesRef = useRef(features);
@@ -107,6 +109,13 @@ const FeaturesModal = ({
    setNewlyAddedFeature(null);
   }
  }, [newlyAddedFeature]);
+ useEffect(() => {
+  const featuresButton = featuresButtonRef.current;
+  const textarea = descriptionTextareaRef.current;
+  if (featuresButton && textarea) {
+   textarea.style.height = `${featuresButton.offsetHeight}px`;
+  }
+ }, [features]);
  return (
   <Dialog
    defaultOpen

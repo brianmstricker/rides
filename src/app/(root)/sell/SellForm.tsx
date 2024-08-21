@@ -7,13 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, PlusIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Plus } from "lucide-react";
+import { useRef, useState } from "react";
 import FeaturesModal from "./FeaturesModal";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import ImageInput from "./ImageInput";
-import Image from "next/image";
 import SelectedImageModal from "./SelectedImageModal";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
@@ -61,13 +60,6 @@ const SellForm = () => {
   setImagesToUpload(null);
   if (imageInputRef.current) imageInputRef.current.value = "";
  }
- useEffect(() => {
-  const featuresButton = featuresButtonRef.current;
-  const textarea = descriptionTextareaRef.current;
-  if (featuresButton && textarea) {
-   textarea.style.height = `${featuresButton.offsetHeight}px`;
-  }
- }, [features]);
  return (
   <>
    <Form {...form}>
@@ -350,6 +342,7 @@ const SellForm = () => {
      customFeatureInput={customFeatureInput}
      setCustomFeatureInput={setCustomFeatureInput}
      featuresButtonRef={featuresButtonRef}
+     descriptionTextareaRef={descriptionTextareaRef}
     />
    )}
    {selectedImageForModal && (

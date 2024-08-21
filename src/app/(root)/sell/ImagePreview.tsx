@@ -1,7 +1,8 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { ArrowLeftRight, Star, X } from "lucide-react";
 import Image from "next/image";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 
 const ImagePreview = memo(
  ({
@@ -11,6 +12,7 @@ const ImagePreview = memo(
   img,
   previewInputRef,
   thumbnail,
+  setSelectedImageForModal,
  }: {
   setPreviewImages: React.Dispatch<React.SetStateAction<File[]>>;
   setImagesToUpload: React.Dispatch<React.SetStateAction<FileList | null | File[]>>;
@@ -18,6 +20,7 @@ const ImagePreview = memo(
   img: File | string;
   previewInputRef: React.RefObject<HTMLInputElement>;
   thumbnail?: boolean;
+  setSelectedImageForModal: React.Dispatch<React.SetStateAction<File | null>>;
  }) => {
   const removeImage = useCallback(
    (imgToRemove: File) => {
@@ -29,10 +32,13 @@ const ImagePreview = memo(
    [previewImages, setImagesToUpload, setPreviewImages, previewInputRef]
   );
   return (
-   <div className="relative w-full aspect-square cursor-pointer">
+   <div className="relative w-full aspect-square cursor-pointer" onClick={() => setSelectedImageForModal(img as File)}>
     <button
      className="absolute -top-1.5 -right-1.5 p-0.5 bg-background border rounded-full flex items-center justify-center w-5 h-5 z-[2] outline-none hover:bg-input"
-     onClick={() => removeImage(img as File)}
+     onClick={(e) => {
+      e.stopPropagation();
+      removeImage(img as File);
+     }}
      type="button"
     >
      <X />

@@ -9,24 +9,26 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus, PlusIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import ImagePreview from "./ImagePreview";
 import FeaturesModal from "./FeaturesModal";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import ImageInput from "./ImageInput";
+import Image from "next/image";
+import SelectedImageModal from "./SelectedImageModal";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
 }
 
 const SellForm = () => {
- // todo: update features to be a list of checkboxes, click on the box to show modal with the a list of features
  const [previewImages, setPreviewImages] = useState<File[]>([]);
  const [imagesToUpload, setImagesToUpload] = useState<FileList | null | File[]>(null);
  const [showFeaturesModal, setShowFeaturesModal] = useState(false);
  const [customFeatureInput, setCustomFeatureInput] = useState("");
  const [customFeatures, setCustomFeatures] = useState<string[]>([]);
  const [features, setFeatures] = useState<string[]>([]);
+ const [selectedImageForModal, setSelectedImageForModal] = useState<File | null>(null);
+ const [selectedImageAspectRatio, setSelectedImageAspectRatio] = useState<number | null>(null);
  const imageInputRef = useRef<HTMLInputElement>(null);
  const featuresButtonRef = useRef<HTMLButtonElement>(null);
  const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -59,26 +61,6 @@ const SellForm = () => {
   setImagesToUpload(null);
   if (imageInputRef.current) imageInputRef.current.value = "";
  }
- useEffect(() => {
-  if (!imagesToUpload) return;
-  const updatedImages = Array.from(imagesToUpload);
-  const updatedMediaArray = updatedImages.slice(0, 20);
-  const mediaUrlArray = updatedMediaArray.map((media) => URL.createObjectURL(media));
-  setPreviewImages(updatedMediaArray);
-  return () => {
-   mediaUrlArray.forEach((media) => URL.revokeObjectURL(media));
-  };
- }, [imagesToUpload, setPreviewImages]);
- useEffect(() => {
-  if (!previewImages || previewImages.length === 0) return;
-  previewImages.forEach((prev) => {
-   const url = URL.createObjectURL(prev);
-   const img = document.createElement("img");
-   img.src = url;
-   img.onload = () => URL.revokeObjectURL(url);
-   if (imageInputRef.current) imageInputRef.current.value = "";
-  });
- }, [previewImages, previewImages.length]);
  useEffect(() => {
   const featuresButton = featuresButtonRef.current;
   const textarea = descriptionTextareaRef.current;
@@ -268,6 +250,7 @@ const SellForm = () => {
       setImagesToUpload={setImagesToUpload}
       previewImages={previewImages}
       setPreviewImages={setPreviewImages}
+      setSelectedImageForModal={setSelectedImageForModal}
      />
      <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
      <FormGroup>
@@ -366,6 +349,14 @@ const SellForm = () => {
      setFeatures={setFeatures}
      customFeatureInput={customFeatureInput}
      setCustomFeatureInput={setCustomFeatureInput}
+    />
+   )}
+   {selectedImageForModal && (
+    <SelectedImageModal
+     selectedImageForModal={selectedImageForModal}
+     setSelectedImageForModal={setSelectedImageForModal}
+     selectedImageAspectRatio={selectedImageAspectRatio}
+     setSelectedImageAspectRatio={setSelectedImageAspectRatio}
     />
    )}
   </>

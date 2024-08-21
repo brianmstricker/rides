@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -52,10 +53,11 @@ const FeaturesModal = ({
  customFeatureInput: string;
  setCustomFeatureInput: Dispatch<SetStateAction<string>>;
 }) => {
- // todo: potentially add custom features to local storage
- const [newlyAddedFeature, setNewlyAddedFeature] = useState<string | null>(null);
- const customInputRef = useRef<HTMLInputElement>(null);
+ // todo: potentially save custom features to local storage
  const previousFeaturesRef = useRef(features);
+ const [newlyAddedFeature, setNewlyAddedFeature] = useState<string | null>(null);
+ const [previousFeaturesArray, setPreviousFeaturesArray] = useState<string[]>(previousFeaturesRef.current);
+ const customInputRef = useRef<HTMLInputElement>(null);
  function addCustomFeature() {
   if (customFeatureInput.trim().length === 0) return;
   if (customFeatureInput.trim().length > 25) {
@@ -71,19 +73,26 @@ const FeaturesModal = ({
    return;
   }
   setCustomFeatures([...customFeatures, customFeatureInput.trim()]);
+  setFeatures([...features, customFeatureInput.trim()]);
   setCustomFeatureInput("");
   customInputRef.current?.focus();
   setNewlyAddedFeature(customFeatureInput);
  }
- function updateFeatures() {
-  // if (customFeatureInput.trim().length > 0) addCustomFeature();
-  const uniqueFeatures = [...features, ...customFeatures].filter((f, i, self) => self.indexOf(f) === i);
-  const previousFeatures = previousFeaturesRef.current;
-  JSON.stringify(previousFeatures) !== JSON.stringify(uniqueFeatures) && toast.success("Features updated");
+ function updateFeatures({ close }: { close?: boolean } = {}) {
+  let uniqueFeatures = [];
+  !close
+   ? (uniqueFeatures = [...features, ...customFeatures].filter((f, i, self) => self.indexOf(f) === i))
+   : (uniqueFeatures = [...new Set([...previousFeaturesArray, ...customFeatures])]);
+  JSON.stringify(previousFeaturesArray) !== JSON.stringify(uniqueFeatures) && toast.success("Features updated");
   setFeatures(uniqueFeatures);
   setShowFeaturesModal(false);
-  // setCustomFeatureInput("");
+  setCustomFeatureInput("");
   customInputRef.current?.focus();
+ }
+ function removeFeature(feature: string) {
+  setCustomFeatures(customFeatures.filter((f) => f !== feature));
+  setFeatures(features.filter((f) => f !== feature));
+  setPreviousFeaturesArray(previousFeaturesArray.filter((f) => f !== feature));
  }
  useEffect(() => {
   if (newlyAddedFeature) {
@@ -95,7 +104,12 @@ const FeaturesModal = ({
   }
  }, [newlyAddedFeature]);
  return (
-  <Dialog defaultOpen onOpenChange={updateFeatures}>
+  <Dialog
+   defaultOpen
+   onOpenChange={() => {
+    updateFeatures({ close: true });
+   }}
+  >
    <DialogContent className="max-w-7xl" onPointerDownOutside={(e) => e.preventDefault()}>
     <DialogHeader>
      <DialogTitle>Features</DialogTitle>
@@ -125,13 +139,7 @@ const FeaturesModal = ({
      })}
      {customFeatures.map((feature, i) => (
       <div key={i} data-feature={feature} className="py-4 flex items-center gap-4">
-       <button
-        type="button"
-        onClick={() => {
-         setCustomFeatures(customFeatures.filter((f) => f !== feature));
-         setFeatures(features.filter((f) => f !== feature));
-        }}
-       >
+       <button type="button" onClick={() => removeFeature(feature)}>
         <CircleX className="w-5 h-5" />
        </button>
        <span className="capitalize">{feature}</span>
@@ -166,7 +174,12 @@ const FeaturesModal = ({
      )}
     </div>
     <DialogFooter>
-     <Button type="button" onClick={updateFeatures}>
+     <Button
+      type="button"
+      onClick={() => {
+       updateFeatures();
+      }}
+     >
       Update features
      </Button>
     </DialogFooter>

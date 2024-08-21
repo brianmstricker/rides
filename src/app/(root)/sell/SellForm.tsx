@@ -39,7 +39,7 @@ const SellForm = () => {
    model: "",
    year: 0,
    mileage: undefined,
-   price: 0,
+   price: "",
    seller_location: "",
    exterior_color: "",
    interior_color: "",
@@ -72,9 +72,9 @@ const SellForm = () => {
        name="year"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Year *</FormLabel>
+         <FormLabel>Year*</FormLabel>
          <FormControl>
-          <Input {...field} />
+          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -98,7 +98,7 @@ const SellForm = () => {
        name="price"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Price *</FormLabel>
+         <FormLabel>Price*</FormLabel>
          <FormControl>
           <Input {...field} />
          </FormControl>
@@ -113,7 +113,7 @@ const SellForm = () => {
        name="seller_location"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Location (country) *</FormLabel>
+         <FormLabel>Location (country)*</FormLabel>
          <FormControl>
           <Input {...field} />
          </FormControl>
@@ -126,7 +126,7 @@ const SellForm = () => {
        name="exterior_color"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Exterior Color *</FormLabel>
+         <FormLabel>Exterior Color*</FormLabel>
          <FormControl>
           <Input {...field} />
          </FormControl>
@@ -154,7 +154,7 @@ const SellForm = () => {
        name="description"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Description *</FormLabel>
+         <FormLabel>Description*</FormLabel>
          <FormControl>
           <Textarea {...field} className="min-h-[5rem] max-h-[15rem] resize-none" maxLength={500} ref={descriptionTextareaRef} />
          </FormControl>
@@ -210,14 +210,34 @@ const SellForm = () => {
        </button>
       )}
      </div>
-     <ImageInput
+     <FormField
+      control={form.control}
+      name="images"
+      render={({ field }) => (
+       <FormItem>
+        <FormControl>
+         <ImageInput
+          imageInputRef={imageInputRef}
+          imagesToUpload={imagesToUpload}
+          setImagesToUpload={setImagesToUpload}
+          previewImages={previewImages}
+          setPreviewImages={setPreviewImages}
+          setSelectedImageForModal={setSelectedImageForModal}
+          form={form}
+         />
+        </FormControl>
+        <FormMessage />
+       </FormItem>
+      )}
+     />
+     {/* <ImageInput
       imageInputRef={imageInputRef}
       imagesToUpload={imagesToUpload}
       setImagesToUpload={setImagesToUpload}
       previewImages={previewImages}
       setPreviewImages={setPreviewImages}
       setSelectedImageForModal={setSelectedImageForModal}
-     />
+     /> */}
      <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
      <FormGroup>
       <FormField

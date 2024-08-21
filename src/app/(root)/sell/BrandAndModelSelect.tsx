@@ -18,7 +18,7 @@ const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
     name="brand"
     render={({ field }) => (
      <FormItem>
-      <FormLabel>Brand *</FormLabel>
+      <FormLabel>Brand*</FormLabel>
       <FormControl>
        <Creatable
         {...field}
@@ -41,7 +41,7 @@ const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
     name="model"
     render={({ field }) => (
      <FormItem>
-      <FormLabel>Model *</FormLabel>
+      <FormLabel>Model*</FormLabel>
       <FormControl>
        <Creatable
         {...field}

@@ -2,6 +2,7 @@
 import { PlusIcon } from "lucide-react";
 import ImagePreview from "./ImagePreview";
 import { useEffect } from "react";
+import { UseFormReturn } from "react-hook-form";
 
 const ImageInput = ({
  imageInputRef,
@@ -10,6 +11,7 @@ const ImageInput = ({
  previewImages,
  setPreviewImages,
  setSelectedImageForModal,
+ form,
 }: {
  imageInputRef: React.MutableRefObject<HTMLInputElement | null>;
  imagesToUpload: File[] | FileList | null;
@@ -17,6 +19,7 @@ const ImageInput = ({
  previewImages: File[];
  setPreviewImages: React.Dispatch<React.SetStateAction<File[]>>;
  setSelectedImageForModal: React.Dispatch<React.SetStateAction<File | null>>;
+ form: UseFormReturn<any>;
 }) => {
  useEffect(() => {
   if (!previewImages || previewImages.length === 0) return;
@@ -34,10 +37,16 @@ const ImageInput = ({
   const updatedMediaArray = updatedImages.slice(0, 20);
   const mediaUrlArray = updatedMediaArray.map((media) => URL.createObjectURL(media));
   setPreviewImages(updatedMediaArray);
+  form.setValue(
+   "images",
+   updatedMediaArray.map((image) => image.name)
+  );
+  if (form.getValues("images").length > 0) form.clearErrors("images");
   return () => {
    mediaUrlArray.forEach((media) => URL.revokeObjectURL(media));
   };
  }, [imagesToUpload, setPreviewImages]);
+ console.log(form.getValues());
  return (
   <div className="grid min-[360px]:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
    <input

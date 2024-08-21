@@ -97,3 +97,35 @@
 .cl-avatarBox {
  @apply w-[1.75rem] h-[1.75rem] sm:w-[2.1rem] sm:h-[2.1rem];
 }
+
+div .react-select__control {
+ @apply h-9 min-h-9 border border-border bg-background hover:border-border shadow-sm;
+}
+
+div .react-select__control--is-focused {
+ @apply ring-1 ring-ring;
+}
+
+div .react-select__menu {
+ @apply bg-background;
+}
+
+div .react-select__option {
+ @apply text-foreground cursor-pointer;
+}
+
+div .react-select__option--is-focused {
+ @apply bg-blue-300 dark:bg-blue-600;
+}
+
+div .react-select__option--is-selected {
+ @apply bg-blue-700 dark:bg-blue-800 text-white;
+}
+
+div .react-select__indicator-separator {
+ @apply bg-border;
+}
+
+div .react-select__single-value {
+ @apply text-foreground;
+}

@@ -78,6 +78,10 @@ const ListingSchema = new Schema(
   mpg: {
    type: Number,
   },
+  views: {
+   type: Number,
+   default: 0,
+  },
   is_active: { type: Boolean, default: false },
  },
  { timestamps: true }

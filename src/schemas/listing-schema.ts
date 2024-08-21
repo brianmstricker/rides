@@ -1,8 +1,8 @@
 import * as z from "zod";
 
 export const createListingSchema = z.object({
- brand: z.string().min(3, "Brand must be at least 3 characters long").max(20, "Brand must be at most 20 characters long"),
- model: z.string().min(3, "Model must be at least 3 characters long").max(20, "Model must be at most 20 characters long"),
+ brand: z.string().min(1, "Brand is required").max(50, "Brand must be at most 50 characters long"),
+ model: z.string().min(1, "Model is required").max(50, "Model must be at most 50 characters long"),
  year: z.number().min(1900, "Year must be at least 1900").max(2022, "Year must be at most 2022"),
  mileage: z.number().optional(),
  price: z.number().min(100, "Price must be at least 100").max(1000000, "Price must be at most 1000000"),

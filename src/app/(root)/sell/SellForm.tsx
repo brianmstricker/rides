@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { cn } from "@/lib/utils";
 import ImageInput from "./ImageInput";
 import SelectedImageModal from "./SelectedImageModal";
+import BrandAndModelSelect from "./BrandAndModelSelect";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -64,34 +65,7 @@ const SellForm = () => {
   <>
    <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-     <FormGroup>
-      <FormField
-       control={form.control}
-       name="brand"
-       render={({ field }) => (
-        <FormItem>
-         <FormLabel>Brand *</FormLabel>
-         <FormControl>
-          <Input {...field} />
-         </FormControl>
-         <FormMessage />
-        </FormItem>
-       )}
-      />
-      <FormField
-       control={form.control}
-       name="model"
-       render={({ field }) => (
-        <FormItem>
-         <FormLabel>Model *</FormLabel>
-         <FormControl>
-          <Input {...field} />
-         </FormControl>
-         <FormMessage />
-        </FormItem>
-       )}
-      />
-     </FormGroup>
+     <BrandAndModelSelect form={form} />
      <FormGroup>
       <FormField
        control={form.control}

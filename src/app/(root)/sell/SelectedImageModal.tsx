@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 const SelectedImageModal = ({
  selectedImageForModal,
@@ -11,6 +12,7 @@ const SelectedImageModal = ({
  selectedImageAspectRatio: number | null;
  setSelectedImageAspectRatio: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
+ // todo: add navigation buttons to cycle through images, close button
  useEffect(() => {
   if (!selectedImageForModal) return;
   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -36,7 +38,7 @@ const SelectedImageModal = ({
       setSelectedImageAspectRatio(width / height);
      }}
      style={{ maxWidth: "90vw", maxHeight: "90vh", aspectRatio: `${selectedImageAspectRatio || 1}/1` }}
-     className="border-2 overflow-hidden"
+     className={cn("border-2 overflow-hidden", !selectedImageAspectRatio && "opacity-0")}
     />
    </div>
   </div>

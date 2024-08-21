@@ -48,6 +48,7 @@ const ImagePreview = memo(
      className={cn("border-2 rounded-lg overflow-hidden object-cover", thumbnail && "border-yellow-300")}
      alt=""
      fill
+     unoptimized={true}
     />
    </div>
   );

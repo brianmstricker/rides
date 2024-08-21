@@ -39,7 +39,7 @@ const ImagePreview = memo(
     </button>
     <Image
      src={img instanceof File ? URL.createObjectURL(img) : img}
-     className={cn("border-2 rounded-lg overflow-hidden", thumbnail && "border-yellow-300")}
+     className={cn("border-2 rounded-lg overflow-hidden object-cover", thumbnail && "border-yellow-300")}
      alt=""
      fill
     />

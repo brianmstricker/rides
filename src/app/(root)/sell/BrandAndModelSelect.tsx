@@ -5,6 +5,7 @@ import Creatable from "react-select/creatable";
 import { carBrands, carModels } from "./brandsAndModels";
 
 const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
+ // todo: create small popup to inform user they can type to create a new brand or model
  const [selectedBrand, setSelectedBrand] = useState<string | null | undefined>(null);
  const [selectedModel, setSelectedModel] = useState<string | null | undefined>(null);
  useEffect(() => {
@@ -22,7 +23,7 @@ const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
       <FormControl>
        <Creatable
         {...field}
-        placeholder="Select or type to add a new brand"
+        placeholder="Select brand"
         classNamePrefix="react-select"
         options={carBrands}
         value={carBrands.find((option) => option.value === selectedBrand)}
@@ -45,7 +46,7 @@ const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
       <FormControl>
        <Creatable
         {...field}
-        placeholder="Select or type to add a new model"
+        placeholder="Select model"
         classNamePrefix="react-select"
         options={carModels[selectedBrand as keyof typeof carModels] || []}
         value={carModels[selectedBrand as keyof typeof carModels]?.find((option) => option.value === selectedModel) || null}

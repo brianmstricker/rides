@@ -6,7 +6,7 @@ export const createListingSchema = z.object({
  year: z.number().min(1900, "Year must be at least 1900").max(2025, "Year must be at most 2025"),
  mileage: z.number().optional(),
  price: z.string().min(1, "Price required"),
- seller_location: z.string().min(1, "Seller location required").max(20, "Seller location must be at most 20 characters long"),
+ seller_location: z.string().min(1, "Seller location required").max(50, "Seller location must be at most 50 characters long"),
  exterior_color: z.string().min(1, "Exterior color required").max(20, "Exterior color must be at most 20 characters long"),
  interior_color: z.string().optional(),
  transmission: z.string().optional(),

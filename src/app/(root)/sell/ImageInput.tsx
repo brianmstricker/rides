@@ -46,7 +46,6 @@ const ImageInput = ({
    mediaUrlArray.forEach((media) => URL.revokeObjectURL(media));
   };
  }, [imagesToUpload, setPreviewImages]);
- console.log(form.getValues());
  return (
   <div className="grid min-[360px]:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
    <input

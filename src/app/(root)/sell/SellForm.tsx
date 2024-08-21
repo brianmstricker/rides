@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import ImageInput from "./ImageInput";
 import SelectedImageModal from "./SelectedImageModal";
 import BrandAndModelSelect from "./BrandAndModelSelect";
+import CountryInput from "./CountryInput";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -108,19 +109,7 @@ const SellForm = () => {
       />
      </FormGroup>
      <FormGroup>
-      <FormField
-       control={form.control}
-       name="seller_location"
-       render={({ field }) => (
-        <FormItem>
-         <FormLabel>Location (country)*</FormLabel>
-         <FormControl>
-          <Input {...field} />
-         </FormControl>
-         <FormMessage />
-        </FormItem>
-       )}
-      />
+      <CountryInput form={form} />
       <FormField
        control={form.control}
        name="exterior_color"
@@ -200,21 +189,23 @@ const SellForm = () => {
        )}
       />
      </FormGroup>
-     <div className="text-lg pt-1 relative top-1.5 font-bold flex justify-between items-center">
-      <div>
-       Images*<span className="text-sm ml-2">(20 max)</span>
-      </div>
-      {previewImages && previewImages.length > 0 && (
-       <button className="text-sm px-0.5" type="button" onClick={clearAllImagePreviews}>
-        Clear all
-       </button>
-      )}
-     </div>
      <FormField
       control={form.control}
       name="images"
       render={({ field }) => (
        <FormItem>
+        <div className="pt-1 relative top-1.5 flex justify-between items-center mb-4">
+         <FormLabel>
+          <div className="text-lg font-bold">
+           Images*<span className="text-sm ml-2">(20 max)</span>
+          </div>
+         </FormLabel>
+         {previewImages && previewImages.length > 0 && (
+          <button className="text-sm px-0.5 font-bold" type="button" onClick={clearAllImagePreviews}>
+           Clear all
+          </button>
+         )}
+        </div>
         <FormControl>
          <ImageInput
           imageInputRef={imageInputRef}
@@ -230,14 +221,6 @@ const SellForm = () => {
        </FormItem>
       )}
      />
-     {/* <ImageInput
-      imageInputRef={imageInputRef}
-      imagesToUpload={imagesToUpload}
-      setImagesToUpload={setImagesToUpload}
-      previewImages={previewImages}
-      setPreviewImages={setPreviewImages}
-      setSelectedImageForModal={setSelectedImageForModal}
-     /> */}
      <div className="text-lg pt-1 relative top-1.5 font-bold">Misc.</div>
      <FormGroup>
       <FormField

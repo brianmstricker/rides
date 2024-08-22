@@ -3,31 +3,21 @@ import useUserMenu from "@/hooks/useUserMenu";
 import { cn } from "@/lib/utils";
 import { SignOutButton, useAuth, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Cog, DollarSign, Heart, LogOut, Pen, User2 } from "lucide-react";
+import { Cog, DollarSign, Heart, LogOut, Pen, Shield, User2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { toast } from "sonner";
+import UserMenuItem from "./UserMenuItem";
 
 type UserMenuProps = {
  image: string | null;
  username: string | null;
  fName: string | null;
+ isAdmin: boolean;
 };
 
-function MenuItem({ icon, text }: { icon?: JSX.Element; text?: string }) {
- return (
-  <div
-   className={cn("w-full py-2 px-4 flex items-center gap-2 transition-colors duration-300", icon && "hover:bg-muted cursor-pointer")}
-   tabIndex={0}
-  >
-   {icon}
-   <span>{text}</span>
-  </div>
- );
-}
-
-const UserMenu = ({ image, username, fName }: UserMenuProps) => {
- const { loadingImg, setLoadingImg, menuRef, onMenuClick, showMenu } = useUserMenu();
+const UserMenu = ({ image, username, fName, isAdmin }: UserMenuProps) => {
+ const { loadingImg, setLoadingImg, menuRef, onMenuClick, showMenu, setShowMenu } = useUserMenu();
  const { signOut } = useAuth();
  const { theme } = useTheme();
  const darkMode = theme === "dark";
@@ -60,20 +50,26 @@ const UserMenu = ({ image, username, fName }: UserMenuProps) => {
     </button>
     {showMenu && (
      <div
-      className="absolute bg-primary-foreground border py-2 top-9 rounded-md right-0 min-w-[160px] flex flex-col items-start overflow-x-hidden text-sm md:text-base"
+      className="absolute bg-primary-foreground border py-2 top-9 rounded-md right-0 min-w-[160px] flex flex-col items-start overflow-x-hidden text-sm md:text-base px-0.5"
       ref={menuRef}
      >
       {(username || fName) && (
        <>
-        <MenuItem text={username || fName || "User"} />
+        <UserMenuItem setShowMenu={setShowMenu} text={username || fName || "User"} />
         <div className="w-full bg-border h-[1px] my-2 scale-150" />
        </>
       )}
-      <MenuItem icon={<Heart size={20} />} text="Favorites" />
-      <MenuItem icon={<User2 size={20} />} text="Profile" />
-      <MenuItem icon={<Cog size={20} />} text="Settings" />
+      {isAdmin && (
+       <>
+        <UserMenuItem setShowMenu={setShowMenu} icon={<Shield size={20} />} text="Admin" link="admin" />
+        <div className="w-full bg-border h-[1px] my-2 scale-150" />
+       </>
+      )}
+      <UserMenuItem setShowMenu={setShowMenu} icon={<Heart size={20} />} text="Favorites" link="favorites" />
+      <UserMenuItem setShowMenu={setShowMenu} icon={<User2 size={20} />} text="Profile" link="profile" />
+      <UserMenuItem setShowMenu={setShowMenu} icon={<Cog size={20} />} text="Settings" link="settings" />
       <div className="w-full bg-border h-[1px] my-2 scale-150" />
-      <MenuItem icon={<DollarSign size={20} />} text="Sell vehicle" />
+      <UserMenuItem setShowMenu={setShowMenu} icon={<DollarSign size={20} />} text="Sell vehicle" link="sell" />
       <div className="w-full bg-border h-[1px] my-2 scale-150" />
       <button
        className="w-full"
@@ -82,7 +78,7 @@ const UserMenu = ({ image, username, fName }: UserMenuProps) => {
         toast("Logged out successfully.");
        }}
       >
-       <MenuItem icon={<LogOut size={20} />} text="Logout" />
+       <UserMenuItem setShowMenu={setShowMenu} icon={<LogOut size={20} />} text="Logout" />
       </button>
      </div>
     )}

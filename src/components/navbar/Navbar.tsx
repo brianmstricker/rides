@@ -6,7 +6,7 @@ import NavSearch from "./NavSearch";
 import { currentUser } from "@clerk/nextjs/server";
 import UserMenu from "./UserMenu";
 import LoginButton from "./LoginButton";
-import { getUsername } from "@/actions/user-actions";
+import { getUserInfo } from "@/actions/user-actions";
 
 type NavOption = {
  name: string;
@@ -23,7 +23,7 @@ const NavOptions: NavOption[] = [
 const Navbar = async () => {
  // todo: add border on scroll border-b-4 border-b-mainPurple
  const userClerk = await currentUser();
- const username = await getUsername();
+ const user = await getUserInfo();
  return (
   <div className="bg-primary-foreground text-foreground h-12 sm:h-16 top-0 w-full z-10 fixed">
    <div className="contain h-full">
@@ -71,9 +71,12 @@ const Navbar = async () => {
        <UserMenu
         image={userClerk.imageUrl}
         username={
-         username && typeof username === "string" ? username : userClerk.username || userClerk.emailAddresses[0].emailAddress || ""
+         "username" in user && typeof user.username === "string"
+          ? user.username
+          : userClerk.username || userClerk.emailAddresses[0].emailAddress || ""
         }
         fName={userClerk.firstName}
+        isAdmin={"isAdmin" in user && typeof user.isAdmin === "boolean" ? user.isAdmin : false}
        />
       ) : (
        <LoginButton />

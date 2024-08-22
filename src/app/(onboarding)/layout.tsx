@@ -10,7 +10,7 @@ export default async function OnboardingLayout({
  const user = await currentUser();
  if (!user) return redirect("/sign-in");
  if (user) {
-  const username = await getUsername({ userId: user.id });
+  const username = await getUsername();
   if (username) return redirect("/");
  }
  return <div className="h-screen">{children}</div>;

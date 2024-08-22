@@ -2,6 +2,7 @@
 import { UserModel } from "@/models/User";
 import { usernameSchema } from "@/schemas/user-schema";
 import { auth } from "@clerk/nextjs/server";
+import { UserType } from "@/models/User";
 
 export const getUsername = async (): Promise<string | boolean | { error: string }> => {
  try {
@@ -35,6 +36,32 @@ export const createUserAndUsername = async ({ username }: Readonly<{ username: s
   return validatedUsername;
  } catch (error: any) {
   console.error("createUsername error", error);
+  return { error: error?.message ?? "An error occurred. Please try again." };
+ }
+};
+
+export const getUserInfo = async (): Promise<UserType | { error: string }> => {
+ try {
+  const { userId } = auth();
+  if (!userId) return { error: "User not found" };
+  const existingUser = await UserModel.findOne({ clerkUserId: userId }).exec();
+  if (!existingUser) return { error: "User not found" };
+  return existingUser;
+ } catch (error: any) {
+  console.error("getUsername error", error);
+  return { error: error?.message ?? "An error occurred. Please try again." };
+ }
+};
+
+export const isUserAdmin = async (): Promise<boolean | { error: string }> => {
+ try {
+  const { userId } = auth();
+  if (!userId) return { error: "User not found" };
+  const existingUser = await UserModel.findOne({ clerkUserId: userId }).exec();
+  if (!existingUser) return { error: "User not found" };
+  return existingUser.isAdmin;
+ } catch (error: any) {
+  console.error("getUsername error", error);
   return { error: error?.message ?? "An error occurred. Please try again." };
  }
 };

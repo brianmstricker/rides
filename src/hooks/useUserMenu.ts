@@ -60,5 +60,5 @@ export default function useUserMenu() {
   document.addEventListener("keydown", handleEscape);
   return () => document.removeEventListener("keydown", handleEscape);
  }, [showMenu]);
- return { loadingImg, setLoadingImg, showMenu, menuRef, onMenuClick };
+ return { loadingImg, setLoadingImg, showMenu, menuRef, onMenuClick, setShowMenu };
 }

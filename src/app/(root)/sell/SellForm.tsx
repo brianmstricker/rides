@@ -41,7 +41,7 @@ const SellForm = () => {
    brand: "",
    model: "",
    year: 0,
-   mileage: undefined,
+   mileage: 0,
    price: "",
    seller_location: "",
    exterior_color: "",
@@ -53,7 +53,7 @@ const SellForm = () => {
    description: "",
    images: [],
    features: [],
-   mpg: undefined,
+   mpg: 0,
   },
  });
  function onSubmit(values: z.infer<typeof createListingSchema>) {
@@ -66,6 +66,7 @@ const SellForm = () => {
  }
  function onNumberInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
   if (e.key === "-" || e.key === "." || e.key === "+" || e.key === "e" || e.key === "E") e.preventDefault();
+  if (e.key === "ArrowDown" && e.currentTarget.value === "0") e.preventDefault();
  }
  return (
   <>
@@ -80,7 +81,13 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Year*</FormLabel>
          <FormControl>
-          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
+          <Input
+           {...field}
+           type="number"
+           onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+           onKeyDown={onNumberInputKeyDown}
+           min={0}
+          />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -93,7 +100,13 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Mileage</FormLabel>
          <FormControl>
-          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
+          <Input
+           {...field}
+           type="number"
+           onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+           onKeyDown={onNumberInputKeyDown}
+           min={0}
+          />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -299,7 +312,13 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>MPG</FormLabel>
          <FormControl>
-          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
+          <Input
+           {...field}
+           type="number"
+           onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+           onKeyDown={onNumberInputKeyDown}
+           min={0}
+          />
          </FormControl>
          <FormMessage />
         </FormItem>

@@ -16,6 +16,7 @@ import ImageInput from "./ImageInput";
 import SelectedImageModal from "./SelectedImageModal";
 import BrandAndModelSelect from "./BrandAndModelSelect";
 import CountryInput from "./CountryInput";
+import ColorInput from "./ColorInput";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -136,32 +137,7 @@ const SellForm = () => {
      </FormGroup>
      <FormGroup>
       <CountryInput form={form} />
-      <FormField
-       control={form.control}
-       name="exterior_color"
-       render={({ field }) => (
-        <FormItem>
-         <FormLabel>Exterior Color*</FormLabel>
-         <FormControl>
-          <Input {...field} />
-         </FormControl>
-         <FormMessage />
-        </FormItem>
-       )}
-      />
-      <FormField
-       control={form.control}
-       name="interior_color"
-       render={({ field }) => (
-        <FormItem>
-         <FormLabel>Interior Color</FormLabel>
-         <FormControl>
-          <Input {...field} />
-         </FormControl>
-         <FormMessage />
-        </FormItem>
-       )}
-      />
+      <ColorInput form={form} />
      </FormGroup>
      <FormGroup>
       <FormField

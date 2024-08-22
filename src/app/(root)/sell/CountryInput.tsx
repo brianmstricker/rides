@@ -16,7 +16,7 @@ const CountryInput = ({ form }: { form: UseFormReturn<any> }) => {
      <FormControl>
       <Creatable
        {...field}
-       placeholder="Country of sale"
+       placeholder="Country..."
        classNamePrefix="react-select"
        options={countriesList}
        value={countriesList.find((option) => option.value === selectedCountry)}

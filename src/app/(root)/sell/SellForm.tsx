@@ -22,6 +22,7 @@ function FormGroup({ children }: { children: React.ReactNode }) {
 }
 
 const SellForm = () => {
+ // todo: make price have a range picker as well, maybe can show range when user types in price
  const [previewImages, setPreviewImages] = useState<File[]>([]);
  const [imagesToUpload, setImagesToUpload] = useState<FileList | null | File[]>(null);
  const [showFeaturesModal, setShowFeaturesModal] = useState(false);
@@ -62,6 +63,9 @@ const SellForm = () => {
   setImagesToUpload(null);
   if (imageInputRef.current) imageInputRef.current.value = "";
  }
+ function onNumberInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  if (e.key === "-" || e.key === "." || e.key === "+" || e.key === "e" || e.key === "E") e.preventDefault();
+ }
  return (
   <>
    <Form {...form}>
@@ -75,7 +79,7 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Year*</FormLabel>
          <FormControl>
-          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} />
+          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -88,7 +92,7 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Mileage</FormLabel>
          <FormControl>
-          <Input {...field} />
+          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -101,7 +105,29 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>Price*</FormLabel>
          <FormControl>
-          <Input {...field} />
+          <Input
+           {...field}
+           onKeyDown={(e) => {
+            if (
+             !/[0-9-]/.test(e.key) &&
+             e.key !== "Backspace" &&
+             e.key !== "Delete" &&
+             !(e.ctrlKey && e.key === "v") &&
+             !(e.ctrlKey && e.key === "c") &&
+             !(e.ctrlKey && e.key === "x") &&
+             !(e.ctrlKey && e.key === "a") &&
+             !(e.ctrlKey && e.key === "z")
+            ) {
+             e.preventDefault();
+            }
+           }}
+           onPaste={(e) => {
+            const pastedText = e.clipboardData.getData("text");
+            if (!/^\d+(-\d+)?$/.test(pastedText)) {
+             e.preventDefault();
+            }
+           }}
+          />
          </FormControl>
          <FormMessage />
         </FormItem>
@@ -297,7 +323,7 @@ const SellForm = () => {
         <FormItem>
          <FormLabel>MPG</FormLabel>
          <FormControl>
-          <Input {...field} type="number" />
+          <Input {...field} type="number" onChange={(e) => field.onChange(parseInt(e.target.value))} onKeyDown={onNumberInputKeyDown} />
          </FormControl>
          <FormMessage />
         </FormItem>

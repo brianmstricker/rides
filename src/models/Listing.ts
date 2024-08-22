@@ -31,7 +31,7 @@ const ListingSchema = new Schema(
    },
   },
   price: {
-   type: Number,
+   type: String,
    required: true,
   },
   seller_location: {

@@ -42,7 +42,7 @@ const SellForm = () => {
    model: "",
    year: 0,
    mileage: 0,
-   price: "",
+   price: "0",
    seller_location: "",
    exterior_color: "",
    interior_color: "",
@@ -117,31 +117,37 @@ const SellForm = () => {
        name="price"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Price*</FormLabel>
+         <FormLabel>
+          Price* <span className="text-xs">(in USD)</span>
+         </FormLabel>
          <FormControl>
-          <Input
-           {...field}
-           onKeyDown={(e) => {
-            if (
-             !/[0-9-]/.test(e.key) &&
-             e.key !== "Backspace" &&
-             e.key !== "Delete" &&
-             !(e.ctrlKey && e.key === "v") &&
-             !(e.ctrlKey && e.key === "c") &&
-             !(e.ctrlKey && e.key === "x") &&
-             !(e.ctrlKey && e.key === "a") &&
-             !(e.ctrlKey && e.key === "z")
-            ) {
-             e.preventDefault();
-            }
-           }}
-           onPaste={(e) => {
-            const pastedText = e.clipboardData.getData("text");
-            if (!/^\d+(-\d+)?$/.test(pastedText)) {
-             e.preventDefault();
-            }
-           }}
-          />
+          <div className="relative">
+           <span className="absolute top-1/2 -translate-y-1/2 ml-2">$</span>
+           <Input
+            {...field}
+            className="pl-6"
+            onKeyDown={(e) => {
+             if (
+              !/[0-9-]/.test(e.key) &&
+              e.key !== "Backspace" &&
+              e.key !== "Delete" &&
+              !(e.ctrlKey && e.key === "v") &&
+              !(e.ctrlKey && e.key === "c") &&
+              !(e.ctrlKey && e.key === "x") &&
+              !(e.ctrlKey && e.key === "a") &&
+              !(e.ctrlKey && e.key === "z")
+             ) {
+              e.preventDefault();
+             }
+            }}
+            onPaste={(e) => {
+             const pastedText = e.clipboardData.getData("text");
+             if (!/^\d+(-\d+)?$/.test(pastedText)) {
+              e.preventDefault();
+             }
+            }}
+           />
+          </div>
          </FormControl>
          <FormMessage />
         </FormItem>

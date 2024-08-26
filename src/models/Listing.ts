@@ -21,14 +21,7 @@ const ListingSchema = new Schema(
    required: true,
   },
   mileage: {
-   type: Schema.Types.Mixed,
-   validate: {
-    validator: (value: any) => {
-     if (value === null || value === undefined) return true;
-     return typeof value === "number";
-    },
-    message: "Mileage must be a number",
-   },
+   type: String,
   },
   price: {
    type: String,
@@ -50,9 +43,9 @@ const ListingSchema = new Schema(
   },
   drivetrain: {
    type: String,
-   required: true,
    validate: {
-    validator: (value: string) => {
+    validator: (value: string | null | undefined) => {
+     if (value === null || value === undefined) return true;
      return ["FWD", "RWD", "AWD"].includes(value.toUpperCase());
     },
     message: "Drivetrain must be one of FWD, RWD, AWD",

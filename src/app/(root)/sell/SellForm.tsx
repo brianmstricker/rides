@@ -41,7 +41,7 @@ const SellForm = () => {
    brand: "",
    model: "",
    year: 0,
-   mileage: 0,
+   mileage: "",
    price: "0",
    seller_location: "",
    exterior_color: "",
@@ -102,10 +102,26 @@ const SellForm = () => {
          <FormControl>
           <Input
            {...field}
-           type="number"
-           onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-           onKeyDown={onNumberInputKeyDown}
-           min={0}
+           onKeyDown={(e) => {
+            if (
+             !/[0-9-]/.test(e.key) &&
+             e.key !== "Backspace" &&
+             e.key !== "Delete" &&
+             !(e.ctrlKey && e.key === "v") &&
+             !(e.ctrlKey && e.key === "c") &&
+             !(e.ctrlKey && e.key === "x") &&
+             !(e.ctrlKey && e.key === "a") &&
+             !(e.ctrlKey && e.key === "z")
+            ) {
+             e.preventDefault();
+            }
+           }}
+           onPaste={(e) => {
+            const pastedText = e.clipboardData.getData("text");
+            if (!/^\d+(-\d+)?$/.test(pastedText)) {
+             e.preventDefault();
+            }
+           }}
           />
          </FormControl>
          <FormMessage />
@@ -262,7 +278,7 @@ const SellForm = () => {
        name="drivetrain"
        render={({ field }) => (
         <FormItem>
-         <FormLabel>Drivetrain*</FormLabel>
+         <FormLabel>Drivetrain</FormLabel>
          <FormControl>
           <Select
            onValueChange={(value) => {

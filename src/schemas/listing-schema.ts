@@ -4,7 +4,13 @@ export const createListingSchema = z.object({
  brand: z.string().min(1, "Brand required").max(50, "Brand must be at most 50 characters long"),
  model: z.string().min(1, "Model required").max(50, "Model must be at most 50 characters long"),
  year: z.number().min(1900, "Year must be at least 1900").max(2025, "Year must be at most 2025"),
- mileage: z.number().optional(),
+ mileage: z
+  .string()
+  .refine((val) => {
+   if (val === null || val === "" || val === undefined) return true;
+   return /^\d+$/.test(val);
+  }, "Mileage must be a number above 0")
+  .optional(),
  price: z
   .string()
   .min(1, "Price required")
@@ -24,7 +30,7 @@ export const createListingSchema = z.object({
  exterior_color: z.string().min(1, "Exterior color required").max(20, "Exterior color must be at most 20 characters long"),
  interior_color: z.string().optional(),
  transmission: z.string().optional(),
- drivetrain: z.string().min(1, "Drivetrain required"),
+ drivetrain: z.string().optional(),
  fuel_type: z.string().optional(),
  engine: z.string().optional(),
  description: z

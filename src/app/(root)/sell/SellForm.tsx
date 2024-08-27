@@ -66,7 +66,7 @@ const SellForm = () => {
   }
   const res = await createListing(newValues, formData);
   if ("error" in res) {
-   console.log(res.error);
+   console.error(res.error);
    toast.error(res.error);
   }
   if ("success" in res) {

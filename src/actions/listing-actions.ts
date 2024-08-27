@@ -62,3 +62,13 @@ export const createListing = async (
   return { error: error?.message ?? "An error occurred. Please try again." };
  }
 };
+
+export const getRecentListings = async (): Promise<z.infer<typeof createListingSchema>[]> => {
+ try {
+  const listings = await ListingModel.find().sort({ createdAt: -1 }).limit(10).exec();
+  return listings;
+ } catch (error: any) {
+  console.error("getRecentListings error", error);
+  return [];
+ }
+};

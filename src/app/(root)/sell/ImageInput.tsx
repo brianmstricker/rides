@@ -1,7 +1,7 @@
 "use client";
 import { PlusIcon } from "lucide-react";
 import ImagePreview from "./ImagePreview";
-import { useEffect } from "react";
+import { SetStateAction, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 
 const ImageInput = ({
@@ -15,7 +15,7 @@ const ImageInput = ({
 }: {
  imageInputRef: React.MutableRefObject<HTMLInputElement | null>;
  imagesToUpload: File[] | FileList | null;
- setImagesToUpload: React.Dispatch<React.SetStateAction<File[] | FileList | null>>;
+ setImagesToUpload: React.Dispatch<SetStateAction<File[]>>;
  previewImages: File[];
  setPreviewImages: React.Dispatch<React.SetStateAction<File[]>>;
  setSelectedImageForModal: React.Dispatch<React.SetStateAction<File | null>>;

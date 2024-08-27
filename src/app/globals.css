@@ -129,3 +129,7 @@ div .react-select__indicator-separator {
 div .react-select__single-value {
  @apply text-foreground;
 }
+
+div.react-select__input-container {
+ @apply text-foreground;
+}

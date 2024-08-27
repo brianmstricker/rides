@@ -17,6 +17,8 @@ import SelectedImageModal from "./SelectedImageModal";
 import BrandAndModelSelect from "./BrandAndModelSelect";
 import CountryInput from "./CountryInput";
 import ColorInput from "./ColorInput";
+import { createListing } from "@/actions/listing-actions";
+import { toast } from "sonner";
 
 function FormGroup({ children }: { children: React.ReactNode }) {
  return <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">{children}</div>;
@@ -25,7 +27,7 @@ function FormGroup({ children }: { children: React.ReactNode }) {
 const SellForm = () => {
  // todo: make price have a range picker as well, maybe can show range when user types in price
  const [previewImages, setPreviewImages] = useState<File[]>([]);
- const [imagesToUpload, setImagesToUpload] = useState<FileList | null | File[]>(null);
+ const [imagesToUpload, setImagesToUpload] = useState<File[]>([]);
  const [showFeaturesModal, setShowFeaturesModal] = useState(false);
  const [customFeatureInput, setCustomFeatureInput] = useState("");
  const [customFeatures, setCustomFeatures] = useState<string[]>([]);
@@ -56,12 +58,25 @@ const SellForm = () => {
    mpg: 0,
   },
  });
- function onSubmit(values: z.infer<typeof createListingSchema>) {
-  console.log(values);
+ async function onSubmit(values: z.infer<typeof createListingSchema>) {
+  const newValues = { ...values, features: features };
+  const formData = new FormData();
+  for (const file of imagesToUpload) {
+   formData.append("images", file);
+  }
+  const res = await createListing(newValues, formData);
+  if ("error" in res) {
+   console.log(res.error);
+   toast.error(res.error);
+  }
+  if ("success" in res) {
+   toast.success("Listing created!");
+   // todo: redirect to listing here - it will show a waiting page until the listing is accepted by an admin
+  }
  }
  function clearAllImagePreviews() {
   setPreviewImages([]);
-  setImagesToUpload(null);
+  setImagesToUpload([]);
   if (imageInputRef.current) imageInputRef.current.value = "";
  }
  function onNumberInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -111,7 +126,8 @@ const SellForm = () => {
              !(e.ctrlKey && e.key === "c") &&
              !(e.ctrlKey && e.key === "x") &&
              !(e.ctrlKey && e.key === "a") &&
-             !(e.ctrlKey && e.key === "z")
+             !(e.ctrlKey && e.key === "z") &&
+             e.key !== "Tab"
             ) {
              e.preventDefault();
             }
@@ -151,7 +167,8 @@ const SellForm = () => {
               !(e.ctrlKey && e.key === "c") &&
               !(e.ctrlKey && e.key === "x") &&
               !(e.ctrlKey && e.key === "a") &&
-              !(e.ctrlKey && e.key === "z")
+              !(e.ctrlKey && e.key === "z") &&
+              e.key !== "Tab"
              ) {
               e.preventDefault();
              }
@@ -348,7 +365,9 @@ const SellForm = () => {
       />
      </FormGroup>
      <div className="flex justify-center pt-6">
-      <Button type="submit">Submit</Button>
+      <Button type="submit" disabled={form.formState.isSubmitting}>
+       Submit
+      </Button>
      </div>
     </form>
    </Form>

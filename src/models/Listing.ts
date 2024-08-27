@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import { InferSchemaType, model, models, Schema } from "mongoose";
 
 // todo: add type
 const ListingSchema = new Schema(
@@ -45,8 +45,8 @@ const ListingSchema = new Schema(
    type: String,
    validate: {
     validator: (value: string | null | undefined) => {
-     if (value === null || value === undefined) return true;
-     return ["FWD", "RWD", "AWD"].includes(value.toUpperCase());
+     if (!value || value.trim() === "") return true;
+     return /^(FWD|RWD|AWD)$/i.test(value);
     },
     message: "Drivetrain must be one of FWD, RWD, AWD",
    },
@@ -80,4 +80,5 @@ const ListingSchema = new Schema(
  { timestamps: true }
 );
 
+export type ListingType = InferSchemaType<typeof ListingSchema>;
 export const ListingModel = models?.Listing || model("Listing", ListingSchema);

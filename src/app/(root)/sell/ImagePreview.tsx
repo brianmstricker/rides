@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { ArrowLeftRight, Star, X } from "lucide-react";
 import Image from "next/image";
-import { memo, useCallback, useEffect } from "react";
+import { memo, SetStateAction, useCallback, useEffect } from "react";
 
 const ImagePreview = memo(
  ({
@@ -15,7 +15,7 @@ const ImagePreview = memo(
   setSelectedImageForModal,
  }: {
   setPreviewImages: React.Dispatch<React.SetStateAction<File[]>>;
-  setImagesToUpload: React.Dispatch<React.SetStateAction<FileList | null | File[]>>;
+  setImagesToUpload: React.Dispatch<SetStateAction<File[]>>;
   previewImages: File[];
   img: File | string;
   previewInputRef: React.RefObject<HTMLInputElement>;

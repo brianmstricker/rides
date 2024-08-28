@@ -12,7 +12,7 @@ export default async function AdminLayout({
  return (
   <div className="h-screen">
    <AdminNav />
-   {children}
+   <div className="mt-12 sm:mt-16">{children}</div>
   </div>
  );
 }

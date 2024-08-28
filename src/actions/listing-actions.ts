@@ -65,7 +65,15 @@ export const createListing = async (
 
 export const getRecentListings = async (): Promise<z.infer<typeof createListingSchema>[]> => {
  try {
-  const listings = await ListingModel.find().sort({ createdAt: -1 }).limit(10).exec();
+  const listings = await ListingModel.find()
+   .sort({ createdAt: -1 })
+   .limit(10)
+   .populate({
+    path: "userId",
+    model: UserModel,
+    select: "username",
+   })
+   .exec();
   return listings;
  } catch (error: any) {
   console.error("getRecentListings error", error);

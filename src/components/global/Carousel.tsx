@@ -42,6 +42,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
        opacity: i === current ? 1 : 0,
       }}
       loading="eager"
+      aria-hidden={i !== current}
      />
     ))}
    </div>

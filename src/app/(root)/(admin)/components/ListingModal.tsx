@@ -12,6 +12,7 @@ const ListingModal = ({
  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
  setListingClicked: React.Dispatch<React.SetStateAction<ListingType | null>>;
 }) => {
+ const desc = `${listing?.brand?.toLocaleUpperCase()} ${listing?.model?.toLocaleUpperCase()}`;
  return (
   <Dialog
    defaultOpen
@@ -23,11 +24,9 @@ const ListingModal = ({
   >
    <DialogContent className="max-w-7xl">
     <DialogHeader>
-     <DialogTitle className="uppercase">
-      {listing?.brand} {listing?.model}
-     </DialogTitle>
+     <DialogTitle className="uppercase">{desc}</DialogTitle>
     </DialogHeader>
-    <Carousel data={listing?.images} />
+    <Carousel data={listing?.images} desc={desc} />
     <div>test</div>
    </DialogContent>
   </Dialog>

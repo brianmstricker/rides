@@ -1,8 +1,8 @@
 "use server";
 import { UserModel } from "@/models/User";
 import { usernameSchema } from "@/schemas/user-schema";
+import { UserType } from "@/types";
 import { auth } from "@clerk/nextjs/server";
-import { UserType } from "@/models/User";
 
 export const getUsername = async (): Promise<string | boolean | { error: string }> => {
  try {

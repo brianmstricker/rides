@@ -75,10 +75,10 @@ const ListingSchema = new Schema(
    type: Number,
    default: 0,
   },
-  is_active: { type: Boolean, default: false },
+  is_active: { type: String, enum: ["waiting", "active", "blocked", "sold"], default: "waiting" },
  },
  { timestamps: true }
 );
 
-export type ListingType = InferSchemaType<typeof ListingSchema>;
+export type ListingModelType = InferSchemaType<typeof ListingSchema>;
 export const ListingModel = models?.Listing || model("Listing", ListingSchema);

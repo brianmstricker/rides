@@ -1,15 +1,15 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ListingType } from "@/models/Listing";
-import { Eye } from "lucide-react";
+import { Check, Eye, LoaderPinwheel, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import ListingModal from "./ListingModal";
+import { ListingType } from "@/types";
 
-const ListingCard = ({ listings }: { listings: (Partial<ListingType> & { _id: string; userId: { username: string } })[] }) => {
+const ListingCard = ({ listings }: { listings: ListingType[] }) => {
  const [modalOpen, setModalOpen] = useState(false);
- const [listingClicked, setListingClicked] = useState<(Partial<ListingType> & { _id: string; userId: { username: string } }) | null>(null);
- const handleListingClick = (listing: Partial<ListingType> & { _id: string; userId: { username: string } }) => {
+ const [listingClicked, setListingClicked] = useState<ListingType | null>(null);
+ const handleListingClick = (listing: ListingType) => {
   setListingClicked(listing);
   setModalOpen(true);
  };
@@ -50,8 +50,18 @@ const ListingCard = ({ listings }: { listings: (Partial<ListingType> & { _id: st
          </div>
          <div className="flex truncate">Posted by {listing.userId?.username}</div>
         </div>
-        <div className="absolute sm:static sm:ml-auto top-1/2 -translate-y-1/2 right-4 sm:translate-y-0 text-muted-foreground group-hover:text-ring transition-colors duration-200">
-         <Eye />
+        <div className="absolute sm:static sm:ml-auto top-1/2 -translate-y-1/2 right-4 sm:translate-y-0 text-muted-foreground flex flex-col sm:flex-row gap-2.5 items-center">
+         <div className="relative icon">
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 [.icon:hover_&]:opacity-100 pointer-events-none duration-200 py-1 px-2 bg-background rounded-md text-foreground">
+           {listing.is_active === "waiting" && "Pending"}
+           {listing.is_active === "blocked" && "Blocked"}
+           {listing.is_active === "active" && "Active"}
+          </span>
+          {listing.is_active === "waiting" && <LoaderPinwheel className="text-yellow-500" />}
+          {listing.is_active === "blocked" && <X className="text-red-500" />}
+          {listing.is_active === "active" && <Check className="text-green-500" />}
+         </div>
+         <Eye className="group-hover:text-ring transition-colors duration-200" />
         </div>
        </button>
       ))}

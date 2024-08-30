@@ -1,15 +1,16 @@
 "use client";
+import Carousel from "@/components/global/Carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ListingType } from "@/models/Listing";
+import { ListingType } from "@/types";
 
 const ListingModal = ({
  listingClicked: listing,
  setModalOpen,
  setListingClicked,
 }: {
- listingClicked: (Partial<ListingType> & { _id: string; userId: { username: string } }) | null;
+ listingClicked: ListingType | null;
  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
- setListingClicked: React.Dispatch<React.SetStateAction<(Partial<ListingType> & { _id: string; userId: { username: string } }) | null>>;
+ setListingClicked: React.Dispatch<React.SetStateAction<ListingType | null>>;
 }) => {
  return (
   <Dialog
@@ -20,13 +21,13 @@ const ListingModal = ({
     setModalOpen(false);
    }}
   >
-   <DialogContent>
+   <DialogContent className="max-w-7xl">
     <DialogHeader>
      <DialogTitle className="uppercase">
       {listing?.brand} {listing?.model}
      </DialogTitle>
     </DialogHeader>
-    <div>images here</div>
+    <Carousel data={listing?.images} />
     <div>test</div>
    </DialogContent>
   </Dialog>

@@ -16,5 +16,5 @@ const UserSchema = new Schema(
  { timestamps: true }
 );
 
-export type UserType = InferSchemaType<typeof UserSchema>;
+export type UserModelType = InferSchemaType<typeof UserSchema>;
 export const UserModel = models?.User || model("User", UserSchema);

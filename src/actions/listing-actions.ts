@@ -2,6 +2,7 @@
 import { ListingModel } from "@/models/Listing";
 import { UserModel } from "@/models/User";
 import { createListingSchema } from "@/schemas/listing-schema";
+import { ListingType } from "@/types";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
@@ -63,7 +64,7 @@ export const createListing = async (
  }
 };
 
-export const getRecentListings = async (): Promise<z.infer<typeof createListingSchema>[]> => {
+export const getRecentListings = async (): Promise<ListingType[] | []> => {
  try {
   const listings = await ListingModel.find()
    .sort({ createdAt: -1 })
@@ -74,7 +75,7 @@ export const getRecentListings = async (): Promise<z.infer<typeof createListingS
     select: "username",
    })
    .exec();
-  return listings;
+  return listings ?? [];
  } catch (error: any) {
   console.error("getRecentListings error", error);
   return [];

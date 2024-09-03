@@ -48,7 +48,7 @@ const ListingCard = ({ listings }: { listings: ListingType[] }) => {
         </div>
         <div className="absolute sm:static sm:ml-auto top-1/2 -translate-y-1/2 right-4 sm:translate-y-0 text-muted-foreground flex flex-col sm:flex-row gap-2.5 items-center">
          <div className="relative icon">
-          <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 [.icon:hover_&]:opacity-100 pointer-events-none duration-200 py-1 px-2 bg-background rounded-md text-foreground">
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 [.icon:hover_&]:opacity-100 pointer-events-none duration-200 py-1 px-2 bg-background rounded-md text-foreground border">
            {listing.is_active === "waiting" && "Pending"}
            {listing.is_active === "blocked" && "Blocked"}
            {listing.is_active === "active" && "Active"}

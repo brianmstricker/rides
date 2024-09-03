@@ -38,7 +38,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
      onClick={() => handleLeft(current)}
      aria-label="Previous Image"
     >
-     <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-[1.5px] transition-transform duration-200 group-focus-visible:-translate-x-[1.5px]" />
+     <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-[1.5px] transition-transform duration-200 group-focus-visible:-translate-x-[1.5px] text-white" />
     </button>
     <div
      className="flex w-full transition-transform duration-300 ease-in-out aspect-[2.75/3] min-[400px]:aspect-[1] min-[485px]:aspect-[1.5/1] md:aspect-[2.5/1]"
@@ -66,7 +66,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
      onClick={() => handleRight(current)}
      aria-label="Next Image"
     >
-     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-[1.5px] transition-transform duration-200 group-focus-visible:translate-x-[1.5px]" />
+     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-[1.5px] transition-transform duration-200 group-focus-visible:translate-x-[1.5px] text-white" />
     </button>
     <button
      className="absolute bottom-1 right-1 sm:right-3 z-10 text-white text-sm sm:text-base bg-black/90 p-1 rounded"

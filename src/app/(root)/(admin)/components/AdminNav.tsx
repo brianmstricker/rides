@@ -26,7 +26,7 @@ const AdminNav = () => {
  const path = usePathname();
  const activeLink = options.find((option) => option.href === path);
  return (
-  <nav className="bg-primary-foreground text-foreground h-12 sm:h-16 top-0 w-full z-10 fixed border-t py-4 mt-12 sm:mt-16">
+  <nav className="bg-primary-foreground text-foreground h-12 sm:h-16 top-0 w-full fixed border-y py-4 mt-12 sm:mt-16">
    <ul className="flex justify-between mx-auto max-w-[40rem] px-4 w-full text-sm sm:text-base">
     {options.map((option) => (
      <li key={option.name}>

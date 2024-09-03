@@ -22,7 +22,7 @@ import {
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
-const featuresList = [
+export const featuresList = [
  { text: "Heated seats", icon: Heater },
  { text: "Sunroof", icon: Sun },
  { text: "Keyless start", icon: LockKeyholeOpen },

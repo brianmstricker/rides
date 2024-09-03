@@ -8,21 +8,33 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
  const [current, setCurrent] = useState(0);
  const [showGoToImage, setShowGoToImage] = useState(false);
  const scrollRef = useRef<HTMLDivElement>(null);
- const handleLeft = useCallback(() => {
-  if (!data) return;
-  setCurrent((prev) => (prev === 0 ? data.length - 1 : prev - 1));
- }, [data]);
- const handleRight = useCallback(() => {
-  if (!data) return;
-  setCurrent((prev) => (prev === data.length - 1 ? 0 : prev + 1));
- }, [data]);
+ const handleLeft = useCallback(
+  (i: number) => {
+   if (!data) return;
+   setCurrent((prev) => (prev === 0 ? data.length - 1 : prev - 1));
+   if (scrollRef.current) {
+    i === 0 ? (scrollRef.current.scrollLeft = scrollRef.current.scrollWidth) : (scrollRef.current.scrollLeft -= 70);
+   }
+  },
+  [data]
+ );
+ const handleRight = useCallback(
+  (i: number) => {
+   if (!data) return;
+   setCurrent((prev) => (prev === data.length - 1 ? 0 : prev + 1));
+   if (scrollRef.current) {
+    i === data.length - 1 ? (scrollRef.current.scrollLeft = 0) : (scrollRef.current.scrollLeft += 70);
+   }
+  },
+  [data]
+ );
  if (!data || data.length === 0) return null;
  return (
   <div>
    <div className="flex relative items-center overflow-hidden">
     <button
      className="group absolute left-1 sm:left-3 z-10 rounded-full bg-black/90 p-1 hover:scale-105 focus-visible:scale-105 transition-transform duration-200"
-     onClick={handleLeft}
+     onClick={() => handleLeft(current)}
      aria-label="Previous Image"
     >
      <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-[1.5px] transition-transform duration-200 group-focus-visible:-translate-x-[1.5px]" />
@@ -50,7 +62,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
     </div>
     <button
      className="group absolute right-1 sm:right-3 z-10 rounded-full bg-black/90 p-1 hover:scale-105 focus-visible:scale-105 transition-transform duration-200"
-     onClick={handleRight}
+     onClick={() => handleRight(current)}
      aria-label="Next Image"
     >
      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-[1.5px] transition-transform duration-200 group-focus-visible:translate-x-[1.5px]" />
@@ -83,7 +95,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
    <div className="overflow-hidden h-[100px]">
     <div
      ref={scrollRef}
-     style={{ scrollBehavior: "smooth" }}
+     style={{ scrollBehavior: "smooth", scrollbarWidth: "none" }}
      className="w-fit h-fit mx-auto mt-4 flex max-w-[75vw] sm:max-w-lg gap-1.5 overflow-x-auto px-1 pt-1 scroll-px-1 pb-20"
     >
      {data.map((_, i) => (
@@ -96,10 +108,10 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
        onClick={() => {
         setCurrent(i);
         if (scrollRef.current) {
-         if (i === current + 1) scrollRef.current.scrollLeft += 65;
-         if (i === current - 1) scrollRef.current.scrollLeft -= 65;
-         if (i < current - 1) scrollRef.current.scrollLeft -= 100;
-         if (i > current + 1) scrollRef.current.scrollLeft += 100;
+         if (i === current + 1) scrollRef.current.scrollLeft += 70;
+         if (i === current - 1) scrollRef.current.scrollLeft -= 70;
+         if (i < current - 1) scrollRef.current.scrollLeft -= 120;
+         if (i > current + 1) scrollRef.current.scrollLeft += 120;
         }
        }}
       >

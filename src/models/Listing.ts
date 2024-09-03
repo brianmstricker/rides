@@ -75,7 +75,7 @@ const ListingSchema = new Schema(
    type: Number,
    default: 0,
   },
-  is_active: { type: String, enum: ["waiting", "active", "blocked", "sold"], default: "waiting" },
+  is_active: { type: String, enum: ["waiting", "active", "blocked", "sold", "update"], default: "waiting" },
   condition: {
    type: String,
    enum: ["new", "used"],

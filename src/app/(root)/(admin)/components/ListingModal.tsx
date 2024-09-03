@@ -5,7 +5,7 @@ import { ListingType, UserType } from "@/types";
 import dayjs from "dayjs";
 import { featuresList } from "../../sell/FeaturesModal";
 import React, { ForwardRefExoticComponent, RefAttributes, useCallback, useEffect, useMemo, useState } from "react";
-import { LucideProps } from "lucide-react";
+import { Check, CheckSquare, LucideProps, Pencil, X } from "lucide-react";
 
 const ListingModal = ({
  listingClicked: listing,
@@ -16,6 +16,7 @@ const ListingModal = ({
  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
  setListingClicked: React.Dispatch<React.SetStateAction<ListingType | null>>;
 }) => {
+ // todo: add edit feature
  const [customFeatures, setCustomFeatures] = useState<Set<string>>(new Set());
  const carNameAndModel = useMemo(() => listing?.brand + " " + listing?.model, [listing]);
  const featureIcons = useMemo(() => {
@@ -46,11 +47,34 @@ const ListingModal = ({
     setModalOpen(false);
    }}
   >
-   <DialogContent className="max-w-7xl sm:max-h-[90vh] overflow-y-auto">
+   <DialogContent className="max-w-7xl sm:max-h-[90vh] h-full border-r-4 border-r-transparent border-y-4 border-y-transparent">
     <DialogHeader>
      <DialogTitle />
     </DialogHeader>
     <div>
+     <div className="flex items-center justify-between">
+      <div className="flex gap-3">
+       <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
+        <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
+         Approve
+        </span>
+        <Check className="text-green-600" />
+       </button>
+       <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
+        <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
+         Edit
+        </span>
+        <Pencil size={20} className="text-gray-600" />
+       </button>
+       <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
+        <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
+         Block
+        </span>
+        <X className="text-red-600" />
+       </button>
+      </div>
+      <div className="text-xs font-bold">*ADMIN VIEW*</div>
+     </div>
      <Carousel data={listing?.images} desc={carNameAndModel} />
      <div className="relative">
       <div className="capitalize text-xs sm:text-sm leading-3 border w-fit py-0.5 px-1">{listing?.condition}</div>
@@ -59,7 +83,7 @@ const ListingModal = ({
       </div>
       <div>{listing?.mileage && new Intl.NumberFormat().format(Number(listing?.mileage)) + " mi."}</div>
       <div className="mt-4 text-3xl sm:text-4xl font-bold">${new Intl.NumberFormat().format(Number(listing?.price))}</div>
-      <div className="mt-4 sm:absolute sm:right-0 sm:top-0 sm:border sm:px-4 sm:mt-0">
+      <div className="mt-4 sm:absolute sm:right-0 sm:top-0 sm:border sm:px-6 sm:py-1 sm:mt-0">
        <div className="sm:sticky top-0">
         <div className="text-2xl sm:text-3xl font-semibold mb-2">Seller Info</div>
         <div>Sold by: {listing?.userId.username}</div>
@@ -143,7 +167,7 @@ const ListingModal = ({
          ))}
         </div>
         {customFeatures && customFeatures.size > 0 && (
-         <div>
+         <div className="sm:mt-1">
           <div className="font-semibold mb-2">Additional Features</div>
           {[...customFeatures].map((feature, i) => (
            <div key={i} className="inline">

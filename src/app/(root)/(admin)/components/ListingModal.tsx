@@ -12,7 +12,7 @@ const ListingModal = ({
  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
  setListingClicked: React.Dispatch<React.SetStateAction<ListingType | null>>;
 }) => {
- const desc = `${listing?.brand?.toLocaleUpperCase()} ${listing?.model?.toLocaleUpperCase()}`;
+ const carNameAndModel = `${listing?.brand?.toLocaleUpperCase()} ${listing?.model?.toLocaleUpperCase()}`;
  return (
   <Dialog
    defaultOpen
@@ -24,9 +24,14 @@ const ListingModal = ({
   >
    <DialogContent className="max-w-7xl">
     <DialogHeader>
-     <DialogTitle className="uppercase">{desc}</DialogTitle>
+     <DialogTitle className="uppercase text-2xl leading-5">{carNameAndModel}</DialogTitle>
+     <div className="text-sm">
+      <div>
+       Posted by: <span className="font-medium">{listing?.userId?.username}</span>
+      </div>
+     </div>
     </DialogHeader>
-    <Carousel data={listing?.images} desc={desc} />
+    <Carousel data={listing?.images} desc={carNameAndModel} />
     <div>test</div>
    </DialogContent>
   </Dialog>

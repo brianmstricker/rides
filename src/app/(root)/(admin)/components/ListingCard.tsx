@@ -24,7 +24,7 @@ const ListingCard = ({ listings }: { listings: ListingType[] }) => {
       {listings.map((listing) => (
        <button
         key={listing._id}
-        className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 bg-primary-foreground rounded-md grow sm:items-center relative border group cursor-pointer w-full"
+        className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 bg-primary-foreground rounded-md grow sm:items-center relative border group cursor-pointer w-full hover:border-foreground/25 transition-[border] duration-200"
         onClick={() => handleListingClick(listing)}
        >
         <div className="shrink-0">

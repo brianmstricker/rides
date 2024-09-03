@@ -1,7 +1,7 @@
 "use client";
 import Carousel from "@/components/global/Carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ListingType } from "@/types";
+import { ListingType, UserType } from "@/types";
 
 const ListingModal = ({
  listingClicked: listing,
@@ -13,6 +13,7 @@ const ListingModal = ({
  setListingClicked: React.Dispatch<React.SetStateAction<ListingType | null>>;
 }) => {
  const carNameAndModel = `${listing?.brand?.toLocaleUpperCase()} ${listing?.model?.toLocaleUpperCase()}`;
+ // console.log(listing);
  return (
   <Dialog
    defaultOpen
@@ -22,17 +23,29 @@ const ListingModal = ({
     setModalOpen(false);
    }}
   >
-   <DialogContent className="max-w-7xl">
+   <DialogContent className="max-w-7xl sm:max-h-[90vh] overflow-y-auto">
     <DialogHeader>
-     <DialogTitle className="uppercase text-2xl leading-5">{carNameAndModel}</DialogTitle>
-     <div className="text-sm">
-      <div>
-       Posted by: <span className="font-medium">{listing?.userId?.username}</span>
+     <DialogTitle />
+    </DialogHeader>
+    <div className="-mt-4">
+     <Carousel data={listing?.images} desc={carNameAndModel} />
+     <div>
+      <div className="capitalize text-xs sm:text-sm leading-3">{listing?.condition}</div>
+      <div className="sm:text-lg">
+       {listing?.year} {carNameAndModel}
+      </div>
+      <div>{listing?.mileage && new Intl.NumberFormat().format(Number(listing?.mileage)) + " mi."}</div>
+      <div className="mt-3 text-3xl sm:text-4xl font-bold">${new Intl.NumberFormat().format(Number(listing?.price))}</div>
+      <div className="mt-3">
+       <div className="text-2xl sm:text-3xl font-semibold">Seller Info</div>
+       <div>Sold by: {listing?.userId.username}</div>
+       <div>{listing?.seller_location}</div>
+      </div>
+      <div className="mt-3">
+       <div className="text-2xl sm:text-3xl font-semibold">Basic</div>
       </div>
      </div>
-    </DialogHeader>
-    <Carousel data={listing?.images} desc={carNameAndModel} />
-    <div>test</div>
+    </div>
    </DialogContent>
   </Dialog>
  );

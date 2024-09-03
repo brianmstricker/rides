@@ -43,10 +43,6 @@ const ListingCard = ({ listings }: { listings: ListingType[] }) => {
           <div className="uppercase font-bold truncate">
            {listing.brand} ({listing.model})
           </div>
-          {/* <div className="w-1 h-1 bg-foreground mx-1 rounded-full" />
-         <div>${new Intl.NumberFormat().format(Number(listing.price))}</div>
-         <div className="w-1 h-1 bg-foreground mx-1 rounded-full" />
-         <div>{listing.seller_location}</div> */}
          </div>
          <div className="flex truncate">Posted by {listing.userId?.username}</div>
         </div>

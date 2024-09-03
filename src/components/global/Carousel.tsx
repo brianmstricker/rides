@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 
 const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: string }) => {
+ // todo: add swipe gesture for mobile, and on screen resize update scrollRef
  const [current, setCurrent] = useState(0);
  const [showGoToImage, setShowGoToImage] = useState(false);
  const scrollRef = useRef<HTMLDivElement>(null);
@@ -40,7 +41,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
      <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-[1.5px] transition-transform duration-200 group-focus-visible:-translate-x-[1.5px]" />
     </button>
     <div
-     className="flex w-full transition-transform duration-300 ease-in-out aspect-[0.75/1] min-[400px]:aspect-[1] min-[550px]:aspect-[1.5/1] md:aspect-[2.5/1]"
+     className="flex w-full transition-transform duration-300 ease-in-out aspect-[2.75/3] min-[400px]:aspect-[1] min-[485px]:aspect-[1.5/1] md:aspect-[2.5/1]"
      style={{ transform: `translateX(-${current * 100}%)` }}
     >
      {data.map((image, i) => (
@@ -50,7 +51,7 @@ const Carousel = ({ data, desc }: { data: string[] | undefined | null; desc: str
        width={1800}
        height={800}
        src={image}
-       className="aspect-[0.75/1] min-[400px]:aspect-[1] min-[550px]:aspect-[1.5/1] md:aspect-[2.5/1] transition-opacity duration-500 ease-in-out object-contain"
+       className="aspect-[2.75/3] min-[400px]:aspect-[1] min-[485px]:aspect-[1.5/1] md:aspect-[2.5/1] transition-opacity duration-500 ease-in-out object-contain"
        placeholder="empty"
        style={{
         opacity: i === current ? 1 : 0,

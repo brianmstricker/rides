@@ -76,6 +76,11 @@ const ListingSchema = new Schema(
    default: 0,
   },
   is_active: { type: String, enum: ["waiting", "active", "blocked", "sold"], default: "waiting" },
+  condition: {
+   type: String,
+   enum: ["new", "used"],
+   default: "used",
+  },
  },
  { timestamps: true }
 );

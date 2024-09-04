@@ -64,7 +64,7 @@ export const createListing = async (
  }
 };
 
-export const getRecentListings = async (): Promise<ListingType[] | []> => {
+export const getRecentListings = async (): Promise<ListingType[] | { error: string }> => {
  try {
   const listings = await ListingModel.find()
    .sort({ createdAt: -1 })
@@ -78,6 +78,6 @@ export const getRecentListings = async (): Promise<ListingType[] | []> => {
   return listings ?? [];
  } catch (error: any) {
   console.error("getRecentListings error", error);
-  return [];
+  return { error: error?.message ?? "An error occurred. Please try again." };
  }
 };

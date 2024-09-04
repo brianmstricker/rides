@@ -65,3 +65,13 @@ export const isUserAdmin = async (): Promise<boolean | { error: string }> => {
   return { error: error?.message ?? "An error occurred. Please try again." };
  }
 };
+
+export const getRecentUsers = async (): Promise<UserType[] | { error: string }> => {
+ try {
+  const users = await UserModel.find().sort({ createdAt: -1 }).limit(10).exec();
+  return users ?? [];
+ } catch (error: any) {
+  console.error("getRecentUsers error", error);
+  return { error: error?.message ?? "An error occurred. Please try again." };
+ }
+};

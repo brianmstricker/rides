@@ -16,7 +16,7 @@ type NavOption = {
 
 const NavOptions: NavOption[] = [
  { name: "Popular models", href: "popular", submenu: true },
- { name: "New cars", href: "new", submenu: true },
+ { name: "New listings", href: "new", submenu: true },
  { name: "Sell your car", href: "sell" },
 ];
 

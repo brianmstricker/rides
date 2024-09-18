@@ -1,4 +1,4 @@
-import { InferSchemaType, model, models, Schema } from "mongoose";
+import { InferSchemaType, model, models, Schema, Document } from "mongoose";
 
 // todo: add type
 const ListingSchema = new Schema(
@@ -85,5 +85,5 @@ const ListingSchema = new Schema(
  { timestamps: true }
 );
 
-export type ListingModelType = InferSchemaType<typeof ListingSchema>;
+export type ListingModelType = Document & InferSchemaType<typeof ListingSchema>;
 export const ListingModel = models?.Listing || model("Listing", ListingSchema);

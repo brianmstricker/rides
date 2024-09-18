@@ -1,5 +1,5 @@
 "use server";
-import { ListingModel } from "@/models/Listing";
+import { ListingModel, ListingModelType } from "@/models/Listing";
 import { UserModel } from "@/models/User";
 import { createListingSchema } from "@/schemas/listing-schema";
 import { ListingType } from "@/types";
@@ -79,5 +79,22 @@ export const getRecentListings = async (): Promise<ListingType[] | { error: stri
  } catch (error: any) {
   console.error("getRecentListings error", error);
   return { error: error?.message ?? "An error occurred. Please try again." };
+ }
+};
+
+export const updateListingActive = async (
+ listingId: string | undefined | null,
+ value: "active" | "blocked"
+): Promise<{ success: boolean } | { error: string }> => {
+ try {
+  if (!listingId) return { error: "Listing id required" };
+  const listing = (await ListingModel.findById(listingId).exec()) as ListingModelType | null;
+  if (!listing) return { error: "Listing not found" };
+  if (!value || (value !== "active" && value !== "blocked")) return { error: "Invalid value" };
+  value === "active" ? (listing.is_active = "active") : (listing.is_active = "blocked");
+  await listing.save();
+  return { success: true };
+ } catch {
+  return { error: "An error occurred. Please try again." };
  }
 };

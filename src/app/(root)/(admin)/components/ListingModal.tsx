@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import { featuresList } from "../../sell/FeaturesModal";
 import React, { ForwardRefExoticComponent, RefAttributes, useCallback, useEffect, useMemo, useState } from "react";
 import { Check, CheckSquare, LucideProps, Pencil, X } from "lucide-react";
+import { updateListingActive } from "@/actions/listing-actions";
+import { cn } from "@/lib/utils";
 
 const ListingModal = ({
  listingClicked: listing,
@@ -18,6 +20,8 @@ const ListingModal = ({
 }) => {
  // todo: add edit feature
  const [customFeatures, setCustomFeatures] = useState<Set<string>>(new Set());
+ const [loading, setLoading] = useState(false);
+ const [isActive, setIsActive] = useState<"waiting" | "active" | "blocked" | "sold" | "update" | undefined>(listing?.is_active);
  const carNameAndModel = useMemo(() => listing?.brand + " " + listing?.model, [listing]);
  const featureIcons = useMemo(() => {
   const icons: { [key: string]: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined } = {};
@@ -37,7 +41,6 @@ const ListingModal = ({
    setCustomFeatures(newCustomFeatures);
   }
  }, [listing?.features, featureIcons]);
- // console.log(listing);
  return (
   <Dialog
    defaultOpen
@@ -56,24 +59,53 @@ const ListingModal = ({
       <div className="flex gap-3">
        <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
         <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
-         Approve
-        </span>
-        <Check className="text-green-600" />
-       </button>
-       <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
-        <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
          Edit
         </span>
         <Pencil size={20} className="text-gray-600" />
        </button>
-       <button className="w-7 h-7 border flex items-center justify-center rounded-md relative group">
+       <button
+        onClick={async () => {
+         setLoading(true);
+         const res = await updateListingActive(listing?._id, "active");
+         if ("success" in res) setIsActive("active");
+         setLoading(false);
+        }}
+        className="w-7 h-7 border flex items-center justify-center rounded-md relative group"
+        disabled={isActive === "active" || loading}
+       >
+        <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
+         Approve
+        </span>
+        <Check className="text-green-600" />
+       </button>
+       <button
+        onClick={async () => {
+         setLoading(true);
+         const res = await updateListingActive(listing?._id, "blocked");
+         if ("success" in res) setIsActive("blocked");
+         setLoading(false);
+        }}
+        className="w-7 h-7 border flex items-center justify-center rounded-md relative group"
+        disabled={isActive === "blocked" || loading}
+       >
         <span className="absolute text-xs -top-5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-focus-visible:opacity-100 whitespace-nowrap">
          Block
         </span>
         <X className="text-red-600" />
        </button>
       </div>
-      <div className="text-xs font-bold">*ADMIN VIEW*</div>
+      <div className="text-xs font-bold">
+       <div>*ADMIN VIEW*</div>
+       <div
+        className={cn(
+         isActive === "waiting" && "text-yellow-500",
+         isActive === "blocked" && "text-red-500",
+         isActive === "active" && "text-green-500"
+        )}
+       >
+        {isActive === "waiting" ? "Pending" : isActive === "blocked" ? "Blocked" : isActive === "active" ? "Active" : ""}
+       </div>
+      </div>
      </div>
      <Carousel data={listing?.images} desc={carNameAndModel} />
      <div className="relative">

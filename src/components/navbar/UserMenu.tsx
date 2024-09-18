@@ -24,7 +24,10 @@ const UserMenu = ({ image, username, fName, isAdmin }: UserMenuProps) => {
  return (
   <>
    <div className="relative flex flex-col">
-    <button onClick={onMenuClick} className="rounded-full">
+    <button
+     onClick={onMenuClick}
+     className="border-2 border-transparent outline-none focus:outline-none hover:border-foreground focus:border-foreground rounded-full transition-[border] duration-200"
+    >
      {loadingImg && (
       <div className="w-[1.7rem] h-[1.7rem] sm:w-[2.05rem] sm:h-[2.05rem] bg-gray-300 dark:bg-gray-700 rounded-full absolute" />
      )}

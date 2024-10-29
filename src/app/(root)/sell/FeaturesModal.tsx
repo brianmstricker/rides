@@ -115,7 +115,7 @@ const FeaturesModal = ({
   if (featuresButton && textarea) {
    textarea.style.height = `${featuresButton.offsetHeight}px`;
   }
- }, [features]);
+ }, [features, descriptionTextareaRef, featuresButtonRef]);
  return (
   <Dialog
    defaultOpen

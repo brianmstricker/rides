@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
  const router = useRouter();
  const path = usePathname();
  const { theme } = useTheme();
@@ -48,4 +48,4 @@ const page = () => {
   </>
  );
 };
-export default page;
+export default Page;

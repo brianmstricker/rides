@@ -30,7 +30,7 @@ const ImageInput = ({
    img.onload = () => URL.revokeObjectURL(url);
    if (imageInputRef.current) imageInputRef.current.value = "";
   });
- }, [previewImages, previewImages.length]);
+ }, [previewImages, previewImages.length, imageInputRef]);
  useEffect(() => {
   if (!imagesToUpload) return;
   const updatedImages = Array.from(imagesToUpload);
@@ -45,7 +45,7 @@ const ImageInput = ({
   return () => {
    mediaUrlArray.forEach((media) => URL.revokeObjectURL(media));
   };
- }, [imagesToUpload, setPreviewImages]);
+ }, [imagesToUpload, setPreviewImages, form]);
  return (
   <div className="grid min-[360px]:grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
    <input

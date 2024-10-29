@@ -3,7 +3,7 @@ import { SignUp } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 
-const page = () => {
+const Page = () => {
  const { theme } = useTheme();
  const darkMode = theme === "dark";
  return (
@@ -16,4 +16,4 @@ const page = () => {
   </div>
  );
 };
-export default page;
+export default Page;

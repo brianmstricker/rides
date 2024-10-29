@@ -39,7 +39,7 @@ export function ScrollProvider({ children }: Readonly<{ children: React.ReactNod
    }
    setIsRestoring(false);
   }
- }, [mounted, path]);
+ }, [mounted, path, prevPath]);
  if (!mounted) return null;
  return <div style={{ visibility: isRestoring ? "hidden" : "visible" }}>{children}</div>;
 }

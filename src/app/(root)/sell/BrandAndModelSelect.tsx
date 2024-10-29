@@ -11,7 +11,7 @@ const BrandAndModelSelect = ({ form }: { form: UseFormReturn<any> }) => {
  useEffect(() => {
   if (!selectedBrand) return;
   form.setValue("model", "");
- }, [selectedBrand]);
+ }, [selectedBrand, form]);
  return (
   <div className="flex flex-col min-[600px]:flex-row [&>*]:flex-1 gap-x-10 gap-y-3">
    <FormField

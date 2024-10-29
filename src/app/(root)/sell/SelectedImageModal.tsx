@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const SelectedImageModal = ({
@@ -29,7 +30,7 @@ const SelectedImageModal = ({
    onClick={() => setSelectedImageForModal(null)}
   >
    <div onClick={(e) => e.stopPropagation()}>
-    <img
+    <Image
      src={URL.createObjectURL(selectedImageForModal)}
      alt=""
      onLoad={(e: any) => {

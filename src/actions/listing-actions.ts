@@ -24,7 +24,7 @@ export const createListing = async (
  formData: FormData
 ): Promise<{ success: boolean } | { error: string }> => {
  try {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return { error: "User not found" };
   const user = await UserModel.findOne({ clerkUserId: userId }).exec();
   if (!user) return { error: "User not found" };

@@ -54,4 +54,5 @@ const ImagePreview = memo(
   );
  }
 );
+ImagePreview.displayName = "ImagePreview";
 export default ImagePreview;

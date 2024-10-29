@@ -30,7 +30,7 @@ const SelectedImageModal = ({
    onClick={() => setSelectedImageForModal(null)}
   >
    <div onClick={(e) => e.stopPropagation()}>
-    <Image
+    <img
      src={URL.createObjectURL(selectedImageForModal)}
      alt=""
      onLoad={(e: any) => {
